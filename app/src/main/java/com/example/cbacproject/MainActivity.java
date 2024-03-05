@@ -19,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
         Toolbar myToolbar = findViewById(R.id.mytoolbar);
         setSupportActionBar(myToolbar);
         getSupportActionBar().setLogo(R.mipmap.ic_launcher);
-        getSupportActionBar().setTitle("HOME");
+        getSupportActionBar().setTitle("JOLY");
 
     }
     @Override

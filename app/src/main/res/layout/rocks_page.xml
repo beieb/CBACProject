@@ -27,7 +27,8 @@
                 android:gravity="center"
                 android:text="@string/name"
                 app:drawableEndCompat="@drawable/v7c"
-                app:drawableStartCompat="@drawable/v7c" />
+                app:drawableStartCompat="@drawable/v7c"
+                android:textColor="@color/purpletitle"/>
 
 
         </LinearLayout>
@@ -310,7 +311,21 @@
         android:layout_marginVertical="3dp"
         />
 
+    <androidx.appcompat.widget.Toolbar
 
+        android:id="@+id/mytoolbar"
+        android:layout_height="50dp"
+        android:layout_width="match_parent"
+        android:elevation="4dp"
+        android:theme="?attr/actionBarTheme"
+        android:layout_alignParentBottom="true"
+        android:title="@string/home"
+        android:background="@color/purplelogo"
+
+
+        >
+
+    </androidx.appcompat.widget.Toolbar>
 
 
 </RelativeLayout>

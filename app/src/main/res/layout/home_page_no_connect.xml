@@ -78,6 +78,7 @@
         android:theme="?attr/actionBarTheme"
         android:layout_alignParentBottom="true"
         android:title="@string/home"
+        android:background="@color/purplelogo"
 
 
         >

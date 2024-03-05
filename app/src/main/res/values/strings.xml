@@ -28,5 +28,9 @@
     <string name="rocksblock">limestone</string>
     <string name="history">HISTORY :</string>
     <string name="historyblock">2022-08-14T18:04:29.566+02:00</string>
+    <string name="home">HOME</string>
+    <string name="user">USER</string>
+    <string name="map">MAP</string>
+    <string name="mountaineer">MOUNTAINEER</string>
 
 </resources>

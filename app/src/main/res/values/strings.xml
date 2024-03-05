@@ -3,4 +3,8 @@
     <string name="titlehomepage">CBAC</string>
     <string name="phraseacroche">PASHRE D\'AHCCCROE</string>
     <string name="Connexion">CONNEXION</string>
+    <string name="home">HOME</string>
+    <string name="user">USER</string>
+    <string name="map">MAP</string>
+    <string name="mountaineer">MOUNTAINEER</string>
 </resources>

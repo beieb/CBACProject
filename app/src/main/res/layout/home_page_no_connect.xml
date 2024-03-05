@@ -72,48 +72,16 @@
     <androidx.appcompat.widget.Toolbar
 
         android:id="@+id/mytoolbar"
-        android:layout_height="match_parent"
+        android:layout_height="50dp"
         android:layout_width="match_parent"
         android:elevation="4dp"
         android:theme="?attr/actionBarTheme"
-        android:layout_below="@+id/ButtonConnexion"
         android:layout_alignParentBottom="true"
-        android:background="@color/purpletitle"
+        android:title="@string/home"
+
 
         >
-        <ImageButton
-            android:layout_marginHorizontal="25dp"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:onClick="OnClick"
-            android:background="@drawable/map"
-            >
-        </ImageButton>
-        <ImageButton
-            android:layout_marginHorizontal="25dp"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:onClick="OnClick"
-            android:background="@drawable/mountaineer"
-            >
-        </ImageButton>
-        <ImageButton
-            android:layout_marginHorizontal="25dp"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:onClick="OnClick"
-            android:background="@drawable/user"
-            >
-        </ImageButton>
-        <ImageButton
-            android:layout_marginHorizontal="25dp"
 
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:onClick="OnClick"
-            android:background="@drawable/home"
-            >
-        </ImageButton>
     </androidx.appcompat.widget.Toolbar>
 
 

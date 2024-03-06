@@ -1,10 +1,22 @@
 package com.example.cbacproject;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
+import static android.Manifest.permission.ACCESS_FINE_LOCATION;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AlertDialogLayout;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.ActivityCompat;
+
+import android.Manifest;
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.location.LocationManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -17,25 +29,19 @@ import android.widget.TextView;
 public class MainActivity extends AppCompatActivity {
 
     Button showmap;
-    @SuppressLint("MissingInflatedId")
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        /**Toolbar myToolbar = findViewById(R.id.mytoolbar);
+        setContentView(R.layout.rocks_page);
+        Toolbar myToolbar = findViewById(R.id.mytoolbar);
         setSupportActionBar(myToolbar);
         getSupportActionBar().setLogo(R.mipmap.ic_launcher);
-        getSupportActionBar().setTitle("JOLY");*/
-        showmap = findViewById(R.id.showmap);
-        showmap.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, Mapsactivity.class);
-                startActivity(intent);
-            }
-        });
+        getSupportActionBar().setTitle("JOLY");
 
     }
+
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu){
         super.onCreateOptionsMenu(menu);
@@ -54,6 +60,8 @@ public class MainActivity extends AppCompatActivity {
             return true;
         }else if (item.getItemId() == R.id.map) {
             Log.d("CBAC", "map yes");
+            Intent intent = new Intent(MainActivity.this, Mapsactivity.class);
+            startActivity(intent);
             return true;
         } else if (item.getItemId() == R.id.mountaineer){
             Log.d("CBAC", "mountaineer yes");

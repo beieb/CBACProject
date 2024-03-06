@@ -32,5 +32,6 @@
     <string name="user">USER</string>
     <string name="map">MAP</string>
     <string name="mountaineer">MOUNTAINEER</string>
+    <string name="show_map">show map</string>
 
 </resources>

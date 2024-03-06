@@ -35,11 +35,13 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 
 public class Mapsactivity extends FragmentActivity implements OnMapReadyCallback {
 
@@ -212,7 +214,7 @@ public class Mapsactivity extends FragmentActivity implements OnMapReadyCallback
         Log.d(tag, lat+" "+ lon);
 
         LatLng mapFr = new LatLng(lat, lon);
-        this.gMap.addMarker(new MarkerOptions().position(mapFr).title("Marker in france"));
+        this.gMap.addMarker(new MarkerOptions().position(mapFr).title("ME").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));
         this.gMap.moveCamera(CameraUpdateFactory.newLatLng(mapFr));
     }
 }

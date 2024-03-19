@@ -12,6 +12,6 @@
         android:id="@+id/map" android:icon="@drawable/map"
         app:showAsAction="always" android:title="@string/map"/>
     <item
-        android:id="@+id/mountaineer" android:icon="@drawable/car"
+        android:id="@+id/car" android:icon="@drawable/car"
         app:showAsAction="always" android:title="@string/car"/>
 </menu>

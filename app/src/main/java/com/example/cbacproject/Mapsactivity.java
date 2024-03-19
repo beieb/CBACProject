@@ -2,6 +2,8 @@ package com.example.cbacproject;
 
 import static android.Manifest.permission.ACCESS_FINE_LOCATION;
 
+import static java.lang.Double.parseDouble;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
@@ -42,6 +44,9 @@ import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Mapsactivity extends FragmentActivity implements OnMapReadyCallback {
 
@@ -216,5 +221,21 @@ public class Mapsactivity extends FragmentActivity implements OnMapReadyCallback
         LatLng mapFr = new LatLng(lat, lon);
         this.gMap.addMarker(new MarkerOptions().position(mapFr).title("ME").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));
         this.gMap.moveCamera(CameraUpdateFactory.newLatLng(mapFr));
+        List list=new ArrayList<String[]>();
+        list.add(new String[]{"Albert Park Grand Prix Circuit", "-37.8497", "144.968"});
+        list.add(new String[]{"Bahrain International Circuit", "26.0325", "50.5106"});
+
+        definePoint(list);
+
     }
+
+    private void definePoint(List list){
+        for(int j =0; j<list.size(); j++){
+            String[] s = (String[]) list.get(j);
+            LatLng map = new LatLng(parseDouble(s[1]), parseDouble(s[2]));
+            this.gMap.addMarker(new MarkerOptions().position(map).title(s[0]).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA)));
+
+        }
+    }
+
 }

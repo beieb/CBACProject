@@ -142,8 +142,10 @@ public class MapsFragment extends AppCompatActivity  implements OnMapReadyCallba
             Intent intent = new Intent(MapsFragment.this, MainActivity.class);
             startActivity(intent);
             return true;
-        } else if (item.getItemId() == R.id.user){
+        } else if (item.getItemId() == R.id.cat){
             Log.d("CBAC", "user yes");
+            Intent intent = new Intent(MapsFragment.this, DailyCatFact.class);
+            startActivity(intent);
             return true;
         }else if (item.getItemId() == R.id.map) {
             Log.d("CBAC", "map yes");

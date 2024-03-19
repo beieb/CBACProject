@@ -77,8 +77,10 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(MainActivity.this, MainActivity.class);
             startActivity(intent);
             return true;
-        } else if (item.getItemId() == R.id.user){
+        } else if (item.getItemId() == R.id.cat){
             Log.d("CBAC", "user yes");
+            Intent intent = new Intent(MainActivity.this, DailyCatFact.class);
+            startActivity(intent);
             return true;
         }else if (item.getItemId() == R.id.map) {
             Log.d("CBAC", "map yes");

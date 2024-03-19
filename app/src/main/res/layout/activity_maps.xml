@@ -1,0 +1,32 @@
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <fragment xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/map"
+    tools:context=".MapsFragment"
+    android:name="com.google.android.gms.maps.SupportMapFragment"/>
+
+
+    <androidx.appcompat.widget.Toolbar
+
+        android:id="@+id/mytoolbar2"
+        android:layout_height="50dp"
+        android:layout_width="match_parent"
+        android:elevation="4dp"
+        android:theme="?attr/actionBarTheme"
+        android:layout_alignParentBottom="true"
+        android:title="@string/mapToolbar"
+        android:background="@color/purplelogo"
+
+
+        />
+
+</RelativeLayout>
+

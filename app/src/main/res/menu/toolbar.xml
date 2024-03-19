@@ -6,8 +6,8 @@
         android:id="@+id/home" android:icon="@drawable/home"
         app:showAsAction="always" android:title="@string/home"/>
     <item
-        android:id="@+id/user" android:icon="@drawable/user"
-        app:showAsAction="always" android:title="@string/user"/>
+        android:id="@+id/cat" android:icon="@drawable/cat"
+        app:showAsAction="always" android:title="@string/cat"/>
     <item
         android:id="@+id/map" android:icon="@drawable/map"
         app:showAsAction="always" android:title="@string/map"/>

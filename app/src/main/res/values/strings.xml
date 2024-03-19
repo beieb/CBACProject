@@ -9,5 +9,8 @@
     <string name="map">MAP</string>
     <string name="mountaineer">MOUNTAINEER</string>
     <string name="show_map">show map</string>
+    <string name="car">car</string>
+    <string name="circuit">hello</string>
+    <string name="winner">verstappen</string>
 
 </resources>

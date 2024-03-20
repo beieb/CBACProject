@@ -3,203 +3,106 @@
     android:layout_height="match_parent"
     android:layout_width="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android">
-    <FrameLayout
+    <LinearLayout
         android:id="@+id/frame"
-        android:layout_height="300dp"
-        android:layout_width="match_parent">
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="300dp"
-            android:src="@drawable/homeimageone"
-            android:scaleType="center"
-            >
-        </ImageView>
-        <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
+
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="horizontal"
-            >
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:textSize="50sp"
-                android:gravity="center"
-                android:text="@string/name"
-                app:drawableEndCompat="@drawable/v7c"
-                app:drawableStartCompat="@drawable/v7c"
-                android:textColor="@color/purpletitle"/>
+            android:textSize="50sp"
+            android:gravity="center"
+            android:text="@string/name"
+            android:textColor="@color/purpletitle"/>
 
 
-        </LinearLayout>
-    </FrameLayout>
+    </LinearLayout>
     <TextView
 
-        android:id="@+id/grade"
+        android:id="@+id/season"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingHorizontal="15dp"
-        android:text="@string/grade"
+        android:text="@string/season"
         android:layout_below="@id/frame"
         android:textSize="20sp"
         android:layout_marginTop="7dp"
         android:layout_marginBottom="3dp"        />
     <TextView
-        android:id="@+id/gradeblock"
+        android:id="@+id/seasonrace"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/gradeblock"
+        android:text="@string/seasonrace"
         android:layout_below="@id/frame"
-        android:layout_toEndOf="@id/grade"
+        android:layout_toEndOf="@id/season"
         android:textSize="20dp"
         android:layout_marginTop="7dp"
         android:layout_marginBottom="3dp"
         />
     <TextView
 
-        android:id="@+id/open_year"
+        android:id="@+id/round"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingHorizontal="15dp"
-        android:text="@string/open_year"
-        android:layout_below="@id/grade"
+        android:text="@string/round"
+        android:layout_below="@id/season"
         android:textSize="20dp"
         android:layout_marginVertical="3dp"
         />
     <TextView
-        android:id="@+id/open_yearblock"
+        android:id="@+id/roundrace"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/open_yearblock"
-        android:layout_below="@id/grade"
-        android:layout_toEndOf="@id/open_year"
+        android:text="@string/roundrace"
+        android:layout_below="@id/season"
+        android:layout_toEndOf="@id/round"
         android:textSize="20dp"
         android:layout_marginVertical="3dp"
         />
     <TextView
 
-        android:id="@+id/opener"
+        android:id="@+id/raceName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingHorizontal="15dp"
-        android:text="@string/opener"
-        android:layout_below="@id/open_year"
+        android:text="@string/raceName"
+        android:layout_below="@id/round"
         android:textSize="20dp"
         android:layout_marginVertical="3dp"
 
         />
     <TextView
-        android:id="@+id/openerblock"
+        android:id="@+id/raceNamerace"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/openerblock"
-        android:layout_below="@id/open_year"
-        android:layout_toEndOf="@id/opener"
+        android:text="@string/raceNamerace"
+        android:layout_below="@id/round"
+        android:layout_toEndOf="@id/raceName"
         android:textSize="20dp"
         android:layout_marginVertical="3dp"
         />
     <TextView
 
-        android:id="@+id/climbing_type"
+        android:id="@+id/locality"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingHorizontal="15dp"
-        android:text="@string/climbing_type"
-        android:layout_below="@id/opener"
+        android:text="@string/locality"
+        android:layout_below="@id/raceName"
         android:textSize="20dp"
         android:layout_marginVertical="3dp"
         />
     <TextView
-        android:id="@+id/climbing_typeblock"
+        android:id="@+id/localityrace"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/climbing_typeblock"
-        android:layout_below="@id/opener"
-        android:layout_toEndOf="@id/climbing_type"
-        android:textSize="20dp"
-        android:layout_marginVertical="3dp"
-        />
-    <TextView
-
-        android:id="@+id/namespot"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingHorizontal="15dp"
-        android:text="@string/namespot"
-        android:layout_below="@id/climbing_type"
-        android:textSize="20dp"
-        android:layout_marginVertical="3dp"
-        />
-    <TextView
-        android:id="@+id/namespotblock"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/namespotblock"
-        android:layout_below="@id/climbing_type"
-        android:layout_toEndOf="@id/namespot"
-        android:textSize="20dp"
-        android:layout_marginVertical="3dp"
-        />
-    <TextView
-
-        android:id="@+id/rain"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingHorizontal="15dp"
-        android:text="@string/rain"
-        android:layout_below="@id/namespot"
-        android:textSize="20dp"
-        android:layout_marginVertical="3dp"
-        />
-    <TextView
-        android:id="@+id/rainblock"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/rainblock"
-        android:layout_below="@id/namespot"
-        android:layout_toEndOf="@id/rain"
-        android:textSize="20dp"
-        android:layout_marginVertical="3dp"
-        />
-    <TextView
-
-        android:id="@+id/lat"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingHorizontal="15dp"
-        android:text="@string/lat"
-        android:layout_below="@id/rain"
-        android:textSize="20dp"
-        android:layout_marginVertical="3dp"
-        />
-    <TextView
-        android:id="@+id/latblock"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/latblock"
-        android:layout_below="@id/rain"
-        android:layout_toEndOf="@id/lat"
-        android:textSize="20dp"
-        android:layout_marginVertical="3dp"
-        />
-    <TextView
-
-        android:id="@+id/lon"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingHorizontal="15dp"
-        android:text="@string/lon"
-        android:layout_below="@id/lat"
-        android:textSize="20dp"
-        android:layout_marginVertical="3dp"
-        />
-    <TextView
-        android:id="@+id/lonblock"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/lonblock"
-        android:layout_below="@id/lat"
-        android:layout_toEndOf="@id/lon"
+        android:text="@string/localityrace"
+        android:layout_below="@id/raceName"
+        android:layout_toEndOf="@id/locality"
         android:textSize="20dp"
         android:layout_marginVertical="3dp"
         />
@@ -210,106 +113,211 @@
         android:layout_height="wrap_content"
         android:paddingHorizontal="15dp"
         android:text="@string/country"
-        android:layout_below="@id/lon"
+        android:layout_below="@id/locality"
         android:textSize="20dp"
         android:layout_marginVertical="3dp"
         />
     <TextView
-        android:id="@+id/countryblock"
+        android:id="@+id/countryrace"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/countryblock"
-        android:layout_below="@id/lon"
+        android:text="@string/countryrace"
+        android:layout_below="@id/locality"
         android:layout_toEndOf="@id/country"
         android:textSize="20dp"
         android:layout_marginVertical="3dp"
         />
     <TextView
 
-        android:id="@+id/city"
+        android:id="@+id/first"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingHorizontal="15dp"
-        android:text="@string/city"
+        android:text="@string/first"
         android:layout_below="@id/country"
         android:textSize="20dp"
         android:layout_marginVertical="3dp"
         />
     <TextView
-        android:id="@+id/cityblock"
+        android:id="@+id/firstrace"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/cityblock"
+        android:text="@string/firstrace"
         android:layout_below="@id/country"
-        android:layout_toEndOf="@id/country"
+        android:layout_toEndOf="@id/first"
         android:textSize="20dp"
         android:layout_marginVertical="3dp"
         />
-
     <TextView
 
-        android:id="@+id/region"
+        android:id="@+id/timeFirst"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingHorizontal="15dp"
-        android:text="@string/region"
-        android:layout_below="@id/city"
+        android:text="@string/timeFirst"
+        android:layout_below="@id/first"
         android:textSize="20dp"
         android:layout_marginVertical="3dp"
         />
     <TextView
-        android:id="@+id/regionblock"
+        android:id="@+id/timeFirstrace"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/regionblock"
-        android:layout_below="@id/city"
-        android:layout_toEndOf="@id/region"
+        android:text="@string/timeFirstrace"
+        android:layout_below="@id/first"
+        android:layout_toEndOf="@id/timeFirst"
         android:textSize="20dp"
         android:layout_marginVertical="3dp"
         />
     <TextView
 
-        android:id="@+id/rocks"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingHorizontal="15dp"
-        android:text="@string/rocks"
-        android:layout_below="@id/region"
-        android:textSize="20dp"
-        android:layout_marginVertical="3dp"
-        />
-    <TextView
-        android:id="@+id/rocksblock"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/rocksblock"
-        android:layout_below="@id/region"
-        android:layout_toEndOf="@id/rocks"
-        android:textSize="20dp"
-        android:layout_marginVertical="3dp"
-        />
-
-    <TextView
-
-        android:id="@+id/history"
+        android:id="@+id/constructorNameFirst"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingHorizontal="15dp"
-        android:text="@string/history"
-        android:layout_below="@id/rocks"
+        android:text="@string/constructorNameFirst"
+        android:layout_below="@id/timeFirst"
         android:textSize="20dp"
         android:layout_marginVertical="3dp"
         />
     <TextView
-        android:id="@+id/historyblock"
+        android:id="@+id/constructorNameFirstrace"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/historyblock"
-        android:layout_below="@id/rocks"
-        android:layout_toEndOf="@id/history"
+        android:text="@string/constructorNameraceFirst"
+        android:layout_below="@id/timeFirst"
+        android:layout_toEndOf="@id/constructorNameFirst"
         android:textSize="20dp"
         android:layout_marginVertical="3dp"
         />
+    <TextView
+
+        android:id="@+id/second"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="15dp"
+        android:text="@string/second"
+        android:layout_below="@id/constructorNameFirst"
+        android:textSize="20dp"
+        android:layout_marginVertical="3dp"
+        />
+    <TextView
+        android:id="@+id/secondrace"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/secondrace"
+        android:layout_below="@id/constructorNameFirst"
+        android:layout_toEndOf="@id/second"
+        android:textSize="20dp"
+        android:layout_marginVertical="3dp"
+        />
+    <TextView
+
+        android:id="@+id/timeSecond"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="15dp"
+        android:text="@string/timeSecond"
+        android:layout_below="@id/second"
+        android:textSize="20dp"
+        android:layout_marginVertical="3dp"
+        />
+    <TextView
+        android:id="@+id/timeSecondrace"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/timeSecondrace"
+        android:layout_below="@id/second"
+        android:layout_toEndOf="@id/timeSecond"
+        android:textSize="20dp"
+        android:layout_marginVertical="3dp"
+        />
+    <TextView
+
+        android:id="@+id/constructorNameSecond"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="15dp"
+        android:text="@string/constructorNameSecond"
+        android:layout_below="@id/timeSecond"
+        android:textSize="20dp"
+        android:layout_marginVertical="3dp"
+        />
+    <TextView
+        android:id="@+id/constructorNameSecondrace"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/constructorNameraceSecond"
+        android:layout_below="@id/timeSecond"
+        android:layout_toEndOf="@id/constructorNameSecond"
+        android:textSize="20dp"
+        android:layout_marginVertical="3dp"
+        />
+    <TextView
+
+        android:id="@+id/third"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="15dp"
+        android:text="@string/third"
+        android:layout_below="@id/constructorNameSecond"
+        android:textSize="20dp"
+        android:layout_marginVertical="3dp"
+        />
+    <TextView
+        android:id="@+id/thirdrace"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/thirdrace"
+        android:layout_below="@id/constructorNameSecond"
+        android:layout_toEndOf="@id/third"
+        android:textSize="20dp"
+        android:layout_marginVertical="3dp"
+        />
+    <TextView
+
+        android:id="@+id/timeThird"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="15dp"
+        android:text="@string/timeThird"
+        android:layout_below="@id/third"
+        android:textSize="20dp"
+        android:layout_marginVertical="3dp"
+        />
+    <TextView
+        android:id="@+id/timeThirdrace"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/timeThirddrace"
+        android:layout_below="@id/third"
+        android:layout_toEndOf="@id/timeThird"
+        android:textSize="20dp"
+        android:layout_marginVertical="3dp"
+        />
+
+    <TextView
+
+        android:id="@+id/constructorNameThird"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="15dp"
+        android:text="@string/constructorNameThird"
+        android:layout_below="@id/timeThird"
+        android:textSize="20dp"
+        android:layout_marginVertical="3dp"
+        />
+    <TextView
+        android:id="@+id/constructorNameThirdrace"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/constructorNameraceThird"
+        android:layout_below="@id/timeThird"
+        android:layout_toEndOf="@id/constructorNameThird"
+        android:textSize="20dp"
+        android:layout_marginVertical="3dp"
+        />
+   
 
     <androidx.appcompat.widget.Toolbar
 

@@ -9,6 +9,6 @@ public class RocksActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.rocks_page);
+        setContentView(R.layout.race_page);
     }
 }

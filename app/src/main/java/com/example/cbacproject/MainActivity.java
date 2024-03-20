@@ -15,7 +15,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.rocks_page);
+        setContentView(R.layout.race_page);
         Toolbar myToolbar = findViewById(R.id.mytoolbar);
         setSupportActionBar(myToolbar);
         getSupportActionBar().setLogo(R.mipmap.ic_launcher);

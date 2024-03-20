@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 
 /**
@@ -95,5 +96,11 @@ public class MainActivity extends AppCompatActivity {
             return true;
         }
         return false;
+    }
+
+    public void goOnRace(View v){
+        Intent intent = new Intent(MainActivity.this, raceActivity.class);
+        startActivity(intent);
+        finish();
     }
 }

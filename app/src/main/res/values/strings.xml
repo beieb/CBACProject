@@ -35,7 +35,7 @@
     <string name="secondrace" />
     <string name="third">Third :</string>
     <string name="thirdrace" />
-    <string name="constructorNameraceFirst"/>
+    <string name="constructorNameraceFirst" />
     <string name="constructorNameFirst">ConstructorFirst :</string>
     <string name="constructorNameSecond">Constructor second :</string>
     <string name="constructorNameraceSecond" />

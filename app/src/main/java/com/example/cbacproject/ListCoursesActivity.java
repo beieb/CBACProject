@@ -21,6 +21,8 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -30,7 +32,7 @@ public class ListCoursesActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_courses);
-        call("https://ergast.com/api/f1/current/last/results.json");
+        call("https://ergast.com/api/f1/2024/results.json");
     }
     public void call(String param){
         ExecutorService ex= Executors.newSingleThreadExecutor();
@@ -78,7 +80,7 @@ public class ListCoursesActivity extends AppCompatActivity {
     }
 
     private void display(String toDisplay) throws JSONException {
-
+        Log.d("listdecourse", toDisplay);
         String name;
         String season;
         String round;
@@ -94,30 +96,57 @@ public class ListCoursesActivity extends AppCompatActivity {
         String thirdTime;
         String constructorThird;
 
+        List<Course> courses = new ArrayList<>();
 
         JSONObject root = new JSONObject(toDisplay);
         JSONObject suite = root.getJSONObject("MRData");
         JSONObject raceTable = suite.getJSONObject("RaceTable");
-        season = raceTable.getString("season");
         JSONArray race = root.getJSONArray("Races");
-        JSONObject Jname = race.getJSONObject(0);
-        name = Jname.getString("raceName");
-        JSONObject loc = Jname.getJSONObject("Location");
-        locality = loc.getString("locality");
-        country = loc.getString("country");
-        JSONArray Results = Jname.getJSONArray("Results");
-        JSONObject firsts = Results.getJSONObject(0);
+        for(int i=0; i<race.length();i++) {
+            JSONObject Jname = race.getJSONObject(i);
+            season = Jname.getString("season");
+            round = Jname.getString("round");
+            name = Jname.getString("raceName");
+            JSONObject loc = Jname.getJSONObject("Location");
+            locality = loc.getString("locality");
+            country = loc.getString("country");
+            JSONArray Results = Jname.getJSONArray("Results");
+            JSONObject firsts = Results.getJSONObject(0);
 
-        JSONObject driver = firsts.getJSONObject("Driver");
-        first = driver.getString("givenName") + driver.getString("familyName");
+            JSONObject driver = firsts.getJSONObject("Driver");
+            first = driver.getString("givenName") + driver.getString("familyName");
 
-        JSONObject construct =firsts.getJSONObject("Constructor");
-        constructorFirst = construct.getString("name");
+            JSONObject construct = firsts.getJSONObject("Constructor");
+            constructorFirst = construct.getString("name");
 
-        JSONObject lap = firsts.getJSONObject("Time");
-        firstTime = lap.getString("time");
+            JSONObject lap = firsts.getJSONObject("Time");
+            firstTime = lap.getString("time");
 
+            JSONObject seconds = Results.getJSONObject(1);
 
+            driver = firsts.getJSONObject("Driver");
+            second = driver.getString("givenName") + driver.getString("familyName");
+
+            construct = firsts.getJSONObject("Constructor");
+            constructorSecond = construct.getString("name");
+
+            lap = firsts.getJSONObject("Time");
+
+            secondTime = lap.getString("time");
+            JSONObject thirds = Results.getJSONObject(2);
+
+            driver = firsts.getJSONObject("Driver");
+            third = driver.getString("givenName") + driver.getString("familyName");
+
+            construct = firsts.getJSONObject("Constructor");
+            constructorThird = construct.getString("name");
+
+            lap = firsts.getJSONObject("Time");
+            thirdTime = lap.getString("time");
+
+            Course course = new Course(name, season, round, locality, country, first, firstTime, constructorFirst, second, secondTime, constructorSecond, third, thirdTime, constructorThird);
+            courses.add(course);
+        }
     }
 
     public int searchSeason(View view) {

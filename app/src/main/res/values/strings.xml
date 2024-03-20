@@ -58,5 +58,7 @@
     <string name="title_activity_maps_activitywhithout_loc">MapsActivitywhithoutLoc</string>
     <string name="cat">cat</string>
     <string name="dailycatfact">no Daily Cat fact to day</string>
+    <string name="title_activity_redirect_map">RedirectMapActivity</string>
+    <string name="title_activity_maps_no_loc">MapsActivityNoLoc</string>
 
 </resources>

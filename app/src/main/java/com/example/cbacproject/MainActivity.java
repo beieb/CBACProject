@@ -80,7 +80,7 @@ public class MainActivity extends AppCompatActivity {
             finish();
             return true;
         } else if (item.getItemId() == R.id.cat){
-            Log.d("CBAC", "user yes");
+            Log.d("CBAC", "cat yes");
             Intent intent = new Intent(MainActivity.this, DailyCatFact.class);
             startActivity(intent);
             finish();
@@ -92,7 +92,10 @@ public class MainActivity extends AppCompatActivity {
             finish();
             return true;
         } else if (item.getItemId() == R.id.car){
-            Log.d("CBAC", "mountaineer yes");
+            Log.d("CBAC", "car yes");
+            Intent intent = new Intent(MainActivity.this, ListCoursesActivity.class);
+            startActivity(intent);
+            finish();
             return true;
         }
         return false;

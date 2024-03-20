@@ -1,0 +1,57 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ListCoursesActivity"
+    android:id="@+id/layoutQuizOut">
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/year"
+        android:layout_toStartOf="@+id/searchButton"
+        android:hint="ENTREZ L'ANNEE DE LA SAISON SOUHAITEZ"
+        />
+    <Button
+        android:id="@+id/searchButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="serch"
+        android:onClick="searchSeason"
+        android:layout_alignParentRight="true"/>
+    <TextView
+        android:id="@+id/wrongSearch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        android:layout_below="@id/year"
+        android:text="VEUILLIEZ ENTRER UNE ANNEE ENTRE 1950 ET 2024"
+        android:textColor="@color/red"/>
+    <ScrollView
+        android:id="@+id/scroll"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/mytoolbar"
+        android:layout_below="@id/year">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:context=".quizActivity"
+            android:orientation="vertical"
+            android:id="@+id/layoutQuizIn">
+        </RelativeLayout>
+    </ScrollView>
+    <androidx.appcompat.widget.Toolbar
+
+        android:id="@+id/mytoolbar"
+        android:layout_height="50dp"
+        android:layout_width="match_parent"
+        android:elevation="4dp"
+        android:theme="?attr/actionBarTheme"
+        android:layout_alignParentBottom="true"
+        android:title="@string/mapToolbar"
+        android:background="@color/purplelogo"
+
+
+        />
+
+</RelativeLayout>

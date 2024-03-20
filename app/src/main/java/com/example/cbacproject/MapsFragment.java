@@ -60,7 +60,6 @@ public class MapsFragment extends AppCompatActivity  implements OnMapReadyCallba
     private String tag = "PermissionApplication";
 
     private int LOCATION_PERMISSION_CODE =1;
-    private static final String permission = ACCESS_FINE_LOCATION;
     private LocationRequest locationRequest;
 
     @Override
@@ -141,16 +140,19 @@ public class MapsFragment extends AppCompatActivity  implements OnMapReadyCallba
             Log.d("CBAC", "home yes");
             Intent intent = new Intent(MapsFragment.this, MainActivity.class);
             startActivity(intent);
+            finish();
             return true;
         } else if (item.getItemId() == R.id.cat){
             Log.d("CBAC", "user yes");
             Intent intent = new Intent(MapsFragment.this, DailyCatFact.class);
             startActivity(intent);
+            finish();
             return true;
         }else if (item.getItemId() == R.id.map) {
             Log.d("CBAC", "map yes");
-            Intent intent = new Intent(MapsFragment.this, MapsFragment.class);
+            Intent intent = new Intent(MapsFragment.this, RedirectMapActivity.class);
             startActivity(intent);
+            finish();
             return true;
         } else if (item.getItemId() == R.id.car){
             Log.d("CBAC", "mountaineer yes");

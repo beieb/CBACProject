@@ -127,16 +127,19 @@ public class DailyCatFact extends AppCompatActivity {
             Log.d("CBAC", "home yes");
             Intent intent = new Intent(DailyCatFact.this, MainActivity.class);
             startActivity(intent);
+            finish();
             return true;
         } else if (item.getItemId() == R.id.cat){
             Log.d("CBAC", "user yes");
             Intent intent = new Intent(DailyCatFact.this, DailyCatFact.class);
             startActivity(intent);
+            finish();
             return true;
         }else if (item.getItemId() == R.id.map) {
             Log.d("CBAC", "map yes");
             Intent intent = new Intent(DailyCatFact.this, MapsFragment.class);
             startActivity(intent);
+            finish();
             return true;
         } else if (item.getItemId() == R.id.car){
             Log.d("CBAC", "mountaineer yes");

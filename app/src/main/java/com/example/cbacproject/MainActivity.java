@@ -76,16 +76,19 @@ public class MainActivity extends AppCompatActivity {
             Log.d("CBAC", "home yes");
             Intent intent = new Intent(MainActivity.this, MainActivity.class);
             startActivity(intent);
+            finish();
             return true;
         } else if (item.getItemId() == R.id.cat){
             Log.d("CBAC", "user yes");
             Intent intent = new Intent(MainActivity.this, DailyCatFact.class);
             startActivity(intent);
+            finish();
             return true;
         }else if (item.getItemId() == R.id.map) {
             Log.d("CBAC", "map yes");
-            Intent intent = new Intent(MainActivity.this, MapsFragment.class);
+            Intent intent = new Intent(MainActivity.this, RedirectMapActivity.class);
             startActivity(intent);
+            finish();
             return true;
         } else if (item.getItemId() == R.id.car){
             Log.d("CBAC", "mountaineer yes");

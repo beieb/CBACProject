@@ -16,12 +16,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CBACProject"
         tools:targetApi="31">
-        <activity
-            android:name=".DailyCatFact"
-            android:exported="false" />
-        <activity
-            android:name=".InterfaceMap"
-            android:exported="false" />
+
         <!--
              TODO: Before you run your application, you need a Google Maps API key.
 
@@ -38,14 +33,17 @@
             android:value="YOUR_API_KEY" />
 
         <activity
-            android:name=".MapsActivitywhithoutLoc"
+            android:name=".MapsActivityNoLoc"
             android:exported="false"
-            android:label="@string/title_activity_maps_activitywhithout_loc" />
+            android:label="@string/title_activity_maps_no_loc" />
         <activity
-            android:name=".mapActivity"
+            android:name=".RedirectMapActivity"
             android:exported="false"
-            android:label="@string/title_activity_map"
+            android:label="@string/title_activity_redirect_map"
             android:theme="@style/Theme.CBACProject" />
+        <activity
+            android:name=".DailyCatFact"
+            android:exported="false" />
         <activity
             android:name=".MapsFragment"
             android:exported="false" />

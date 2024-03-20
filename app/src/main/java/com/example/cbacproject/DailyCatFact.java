@@ -42,7 +42,6 @@ public class DailyCatFact extends AppCompatActivity {
         getSupportActionBar().setLogo(R.mipmap.ic_launcher);
         getSupportActionBar().setTitle("DCF");
 
-
         et = findViewById(R.id.Dailycatfact);
         call("https://catfact.ninja/fact");
     }
@@ -87,18 +86,23 @@ public class DailyCatFact extends AppCompatActivity {
     }
 
     private void display(String toDisplay) {
-        try{
+        try {
             String end = "Erreur";
             TextView tw = findViewById(R.id.Dailycatfact);
-            JSONObject root=new JSONObject(toDisplay);
-            Log.d("DailyCatFact", end);
-            end=root.getString("fact");
-            Log.d("DailyCatFact", end);
-            tw.setText(end);
+            if (toDisplay.equals("Erreur ")) {
+                tw.setText(end);
+            } else {
+                JSONObject root = new JSONObject(toDisplay);
+                Log.d("DailyCatFact", end);
+                end = root.getString("fact");
+                Log.d("DailyCatFact", end);
+                tw.setText(end);
+            }
 
-        } catch (JSONException e) {
+        } catch(JSONException e){
             throw new RuntimeException(e);
         }
+
     }
 
 

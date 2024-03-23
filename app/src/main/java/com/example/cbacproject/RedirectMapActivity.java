@@ -15,16 +15,11 @@ import android.content.pm.PackageManager;
 import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
 import android.util.Log;
-import android.view.View;
-import android.widget.FrameLayout;
 import android.widget.Toast;
 
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.common.api.ResolvableApiException;
-import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.location.LocationSettingsRequest;
@@ -35,20 +30,8 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.Serializable;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 public class RedirectMapActivity extends AppCompatActivity implements OnMapReadyCallback {
 
@@ -77,7 +60,7 @@ public class RedirectMapActivity extends AppCompatActivity implements OnMapReady
                 if (isGPSEnable()){
                     //verifie que l'utilisateur a le gps d'activé
                     Log.d(tag, "GPS is enable");
-                    intent = new Intent(RedirectMapActivity.this, MapsFragment.class);
+                    intent = new Intent(RedirectMapActivity.this, MapsActivity.class);
 
 
                 }else {
@@ -86,7 +69,7 @@ public class RedirectMapActivity extends AppCompatActivity implements OnMapReady
                     if (isGPSEnable()) {
                         //verifie que l'utilisateur a le gps d'activé
                         Log.d(tag, "GPS is enable");
-                        intent = new Intent(RedirectMapActivity.this, MapsFragment.class);
+                        intent = new Intent(RedirectMapActivity.this, MapsActivity.class);
                         
 
                     } else {
@@ -105,7 +88,7 @@ public class RedirectMapActivity extends AppCompatActivity implements OnMapReady
                     if (isGPSEnable()) {
                         //verifie que l'utilisateur a le gps d'activé
                         Log.d(tag, "GPS is enable");
-                        intent = new Intent(RedirectMapActivity.this, MapsFragment.class);
+                        intent = new Intent(RedirectMapActivity.this, MapsActivity.class);
                         
 
                     } else {
@@ -114,7 +97,7 @@ public class RedirectMapActivity extends AppCompatActivity implements OnMapReady
                         if (isGPSEnable()) {
                             //verifie que l'utilisateur a le gps d'activé
                             Log.d(tag, "GPS is enable");
-                            intent = new Intent(RedirectMapActivity.this, MapsFragment.class);
+                            intent = new Intent(RedirectMapActivity.this, MapsActivity.class);
                             
 
                         } else {

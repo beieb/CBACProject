@@ -47,5 +47,6 @@
     <string name="timeSecondrace" />
     <string name="timeThird">Time :</string>
     <string name="timeThirddrace" />
+    <string name="textResult">VAINQUEURE DE LA DERNIERE COURSE</string>
 
 </resources>

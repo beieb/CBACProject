@@ -5,48 +5,31 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
     <FrameLayout
         android:id="@+id/frame"
-        android:layout_height="wrap_content"
-        android:layout_width="wrap_content">
-
-
-        <ImageView
-            android:layout_gravity="top|center_vertical"
-            android:layout_width="wrap_content"
-            android:layout_height="325dp"
-            android:src="@drawable/homeimage"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:layout_above="@id/frame2"
+        >
+        <WebView
+            android:id="@+id/webview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             />
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:textSize="64sp"
-            android:textColorHint="@color/purpletitle"
-            android:hint="@string/titlehomepage"
-            android:gravity="center" />
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:textSize="40sp"
-            android:textColorHint="@color/purpletitle"
-            android:hint="@string/phraseacroche"
-            android:gravity="center"
-            android:layout_marginTop="120dp"/>
-        </LinearLayout>
+
+
     </FrameLayout>
 
     <FrameLayout
         android:id="@+id/frame2"
         android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
-        android:layout_below="@id/frame">
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+        android:layout_width="match_parent"
+        android:layout_above="@id/mytoolbar">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/textResult"
+                android:hint="@string/textResult"
+                android:gravity="center"
+                />
             <TextView
                 android:id="@+id/circuit"
                 android:layout_width="match_parent"
@@ -54,14 +37,9 @@
                 android:textSize="64sp"
                 android:textColorHint="@color/purpletitle"
                 android:hint="@string/circuit"
-                android:gravity="center" />
+                android:gravity="center"
+                />
 
-        </LinearLayout>
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onClick="goOnRace"
-        />
     </FrameLayout>
 
     <androidx.appcompat.widget.Toolbar

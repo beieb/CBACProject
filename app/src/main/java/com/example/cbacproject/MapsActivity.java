@@ -63,7 +63,7 @@ import java.util.ArrayList;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-public class MapsFragment extends AppCompatActivity  implements OnMapReadyCallback {
+public class MapsActivity extends AppCompatActivity  implements OnMapReadyCallback {
 
     GoogleMap gMap;
     FrameLayout map;
@@ -101,20 +101,20 @@ public class MapsFragment extends AppCompatActivity  implements OnMapReadyCallba
         locationRequest.setFastestInterval(2000);
 
         if(Build.VERSION.SDK_INT>= Build.VERSION_CODES.M){
-            if(ActivityCompat.checkSelfPermission(MapsFragment.this, ACCESS_FINE_LOCATION)== PackageManager.PERMISSION_GRANTED){
+            if(ActivityCompat.checkSelfPermission(MapsActivity.this, ACCESS_FINE_LOCATION)== PackageManager.PERMISSION_GRANTED){
                 //verifie que l'utilisateur a donnée la permission pour la localisation
                 Log.d(tag, "you have already this permission");
                 if (isGPSEnable()){
                     //verifie que l'utilisateur a le gps d'activé
                     Log.d(tag, "GPS is enable");
-                    LocationServices.getFusedLocationProviderClient(MapsFragment.this)
+                    LocationServices.getFusedLocationProviderClient(MapsActivity.this)
                                     .requestLocationUpdates(locationRequest, new LocationCallback() {
                                         //fait une request pour obtenir la localisation
                                         @Override
                                         public void onLocationResult(@NonNull LocationResult locationResult) {
                                             super.onLocationResult(locationResult);
 
-                                            LocationServices.getFusedLocationProviderClient(MapsFragment.this)
+                                            LocationServices.getFusedLocationProviderClient(MapsActivity.this)
                                                     .removeLocationUpdates(this);
                                             if (locationResult != null && locationResult.getLocations().size()>0){
                                                 int index = locationResult.getLocations().size()-1;
@@ -124,7 +124,7 @@ public class MapsFragment extends AppCompatActivity  implements OnMapReadyCallba
                                                 map = findViewById(R.id.map);
 
                                                 SupportMapFragment mapFragment= (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
-                                                mapFragment.getMapAsync(MapsFragment.this);
+                                                mapFragment.getMapAsync(MapsActivity.this);
                                             }
                                         }
                                     }, Looper.getMainLooper());
@@ -154,19 +154,19 @@ public class MapsFragment extends AppCompatActivity  implements OnMapReadyCallba
         TextView txt;
         if (item.getItemId() == R.id.home) {
             Log.d("CBAC", "home yes");
-            Intent intent = new Intent(MapsFragment.this, MainActivity.class);
+            Intent intent = new Intent(MapsActivity.this, MainActivity.class);
             startActivity(intent);
             finish();
             return true;
         } else if (item.getItemId() == R.id.cat){
             Log.d("CBAC", "user yes");
-            Intent intent = new Intent(MapsFragment.this, DailyCatFact.class);
+            Intent intent = new Intent(MapsActivity.this, DailyCatFact.class);
             startActivity(intent);
             finish();
             return true;
         }else if (item.getItemId() == R.id.map) {
             Log.d("CBAC", "map yes");
-            Intent intent = new Intent(MapsFragment.this, RedirectMapActivity.class);
+            Intent intent = new Intent(MapsActivity.this, RedirectMapActivity.class);
             startActivity(intent);
             finish();
             return true;
@@ -204,7 +204,7 @@ public class MapsFragment extends AppCompatActivity  implements OnMapReadyCallba
                         public void onClick(DialogInterface dialog, int which) {
                             Log.d(tag, "requestPermissionButtonOk");
 
-                            ActivityCompat.requestPermissions(MapsFragment.this,new String[]{ACCESS_FINE_LOCATION}, LOCATION_PERMISSION_CODE);
+                            ActivityCompat.requestPermissions(MapsActivity.this,new String[]{ACCESS_FINE_LOCATION}, LOCATION_PERMISSION_CODE);
                             Log.d(tag, "requestPermissionButtonOkclick");
 
                         }
@@ -256,7 +256,7 @@ public class MapsFragment extends AppCompatActivity  implements OnMapReadyCallba
 
                 try {
                     LocationSettingsResponse response = task.getResult(ApiException.class);
-                    Toast.makeText(MapsFragment.this, "GPS is already tured on", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MapsActivity.this, "GPS is already tured on", Toast.LENGTH_SHORT).show();
 
                 } catch (ApiException e) {
 
@@ -265,7 +265,7 @@ public class MapsFragment extends AppCompatActivity  implements OnMapReadyCallba
 
                             try {
                                 ResolvableApiException resolvableApiException = (ResolvableApiException) e;
-                                resolvableApiException.startResolutionForResult(MapsFragment.this, 2);
+                                resolvableApiException.startResolutionForResult(MapsActivity.this, 2);
                             } catch (IntentSender.SendIntentException ex) {
                                 ex.printStackTrace();
                             }

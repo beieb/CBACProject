@@ -13,8 +13,6 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.EditText;
 import android.widget.TextView;
 
 import org.json.JSONException;
@@ -25,8 +23,6 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -137,7 +133,7 @@ public class DailyCatFact extends AppCompatActivity {
             return true;
         }else if (item.getItemId() == R.id.map) {
             Log.d("CBAC", "map yes");
-            Intent intent = new Intent(DailyCatFact.this, MapsFragment.class);
+            Intent intent = new Intent(DailyCatFact.this, MapsActivity.class);
             startActivity(intent);
             finish();
             return true;

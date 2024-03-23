@@ -47,7 +47,7 @@
             android:name=".DailyCatFact"
             android:exported="false" />
         <activity
-            android:name=".MapsFragment"
+            android:name=".MapsActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"

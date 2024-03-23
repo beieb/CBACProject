@@ -19,11 +19,13 @@ import android.content.pm.PackageManager;
 import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -47,8 +49,19 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class MapsFragment extends AppCompatActivity  implements OnMapReadyCallback {
 
@@ -61,6 +74,7 @@ public class MapsFragment extends AppCompatActivity  implements OnMapReadyCallba
 
     private int LOCATION_PERMISSION_CODE =1;
     private LocationRequest locationRequest;
+    List<circuit> listCircuit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,6 +92,8 @@ public class MapsFragment extends AppCompatActivity  implements OnMapReadyCallba
         setSupportActionBar(myToolbar);
         getSupportActionBar().setLogo(R.mipmap.ic_launcher);
         getSupportActionBar().setTitle("Map");
+
+        listCircuit = new ArrayList<circuit>();
 
         locationRequest=LocationRequest.create();
         locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
@@ -282,21 +298,102 @@ public class MapsFragment extends AppCompatActivity  implements OnMapReadyCallba
         LatLng mapFr = new LatLng(lat, lon);
         this.gMap.addMarker(new MarkerOptions().position(mapFr).title("ME").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));
         this.gMap.moveCamera(CameraUpdateFactory.newLatLng(mapFr));
-        List list=new ArrayList<String[]>();
-        list.add(new String[]{"Albert Park Grand Prix Circuit", "-37.8497", "144.968"});
-        list.add(new String[]{"Bahrain International Circuit", "26.0325", "50.5106"});
 
-        definePoint(list);
+        go(this.getCurrentFocus());
+
+
 
     }
 
-    private void definePoint(List list){
+    private void definePoint(List<circuit> list){
         for(int j =0; j<list.size(); j++){
-            String[] s = (String[]) list.get(j);
-            LatLng map = new LatLng(parseDouble(s[1]), parseDouble(s[2]));
-            this.gMap.addMarker(new MarkerOptions().position(map).title(s[0]).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA)));
+            String nom = list.get(j).getNom();
+            String lat = list.get(j).getLat();
+            String lon = list.get(j).getLon();
+            LatLng latLng = new LatLng(parseDouble(lat), parseDouble(lon));
+
+            this.gMap.addMarker(new MarkerOptions().position(latLng).title(nom).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA)));
 
         }
+    }
+
+    public void go(View view) {
+
+        call("https://ergast.com/api/f1/circuits.json?limit=80");
+    }
+    public void call(String param){
+        Log.d("apisMap", "-------------");
+
+        ExecutorService ex= Executors.newSingleThreadExecutor();
+        Handler handler = new Handler(Looper.getMainLooper());
+        ex.execute(new Runnable() {
+            @Override
+            public void run() {
+                String data = getDataFromHTTP(param);
+                handler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            display(data);
+                        } catch (JSONException e) {
+                            throw new RuntimeException(e);
+                        }
+                    }
+                });
+            }
+        });
+    }
+
+    private void display(String toDisplay) throws JSONException {
+
+        Log.d("createCircuit", toDisplay);
+        JSONObject root = new JSONObject(toDisplay);
+
+        JSONObject MRdata = root.getJSONObject("MRData");
+        JSONObject CircuitTable = MRdata.getJSONObject("CircuitTable");
+        JSONArray circuits = CircuitTable.getJSONArray("Circuits");
+
+        String nom;
+        String lat;
+        String lon;
+
+        for(int i=0;i<circuits.length();i++){
+
+            JSONObject circuit = circuits.getJSONObject(i);
+            nom = circuit.getString("circuitName");
+            JSONObject location = circuit.getJSONObject("Location");
+
+            lat = location.getString("lat");
+            lon = location.getString("long");
+            circuit c = new circuit(nom, lat, lon);
+            listCircuit.add(c);
+        }
+        definePoint(listCircuit);
+
+
+    }
+    public String getDataFromHTTP(String param){
+        StringBuilder result = new StringBuilder();
+        HttpURLConnection connexion = null;
+        try {
+            URL url = new URL(param);
+            connexion = (HttpURLConnection) url.openConnection();
+            connexion.setRequestMethod("GET");
+            InputStream inputStream = connexion.getInputStream();
+            InputStreamReader inputStreamReader = new
+                    InputStreamReader(inputStream);
+            BufferedReader bf = new BufferedReader(inputStreamReader);
+            String ligne = "";
+            while ((ligne = bf.readLine()) != null) {
+                result.append(ligne);
+            }
+            inputStream.close();
+            bf.close();
+            connexion.disconnect();
+        } catch (Exception e) {
+            result = new StringBuilder("Erreur ");
+        }
+        return result.toString();
     }
 
 }

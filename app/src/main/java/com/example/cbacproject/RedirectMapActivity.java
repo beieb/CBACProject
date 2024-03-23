@@ -15,8 +15,10 @@ import android.content.pm.PackageManager;
 import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
+import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.Toast;
 
@@ -24,33 +26,50 @@ import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.common.api.ResolvableApiException;
 import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationRequest;
-import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.location.LocationSettingsRequest;
 import com.google.android.gms.location.LocationSettingsResponse;
 import com.google.android.gms.location.LocationSettingsStatusCodes;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.Serializable;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
 public class RedirectMapActivity extends AppCompatActivity implements OnMapReadyCallback {
 
-    GoogleMap gMap;
-    FrameLayout map;
-    private double lat;
-    private double lon;
-    private LocationCallback locationCallback;
     private String tag = "PermissionApplication";
 
     private int LOCATION_PERMISSION_CODE =1;
     private LocationRequest locationRequest;
-
+    private List<circuit> list= new ArrayList<circuit>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_redirect_map);
+
+        chooseActivity();
+
+
+    }
+    private void chooseActivity(){
+        Log.d("createCircuit", String.valueOf(list.size()));
+        Intent intent = null;
+
         if(Build.VERSION.SDK_INT>= Build.VERSION_CODES.M){
             if(ActivityCompat.checkSelfPermission(RedirectMapActivity.this, ACCESS_FINE_LOCATION)== PackageManager.PERMISSION_GRANTED){
                 //verifie que l'utilisateur a donnée la permission pour la localisation
@@ -58,9 +77,8 @@ public class RedirectMapActivity extends AppCompatActivity implements OnMapReady
                 if (isGPSEnable()){
                     //verifie que l'utilisateur a le gps d'activé
                     Log.d(tag, "GPS is enable");
-                    Intent intent = new Intent(RedirectMapActivity.this, MapsFragment.class);
-                    startActivity(intent);
-                    finish();
+                    intent = new Intent(RedirectMapActivity.this, MapsFragment.class);
+
 
                 }else {
                     Log.d(tag, "GPS is not enable");
@@ -68,15 +86,13 @@ public class RedirectMapActivity extends AppCompatActivity implements OnMapReady
                     if (isGPSEnable()) {
                         //verifie que l'utilisateur a le gps d'activé
                         Log.d(tag, "GPS is enable");
-                        Intent intent = new Intent(RedirectMapActivity.this, MapsFragment.class);
-                        startActivity(intent);
-                        finish();
+                        intent = new Intent(RedirectMapActivity.this, MapsFragment.class);
+                        
 
                     } else {
                         Log.d(tag, "GPS is not enable");
-                        Intent intent = new Intent(RedirectMapActivity.this, MapsActivityNoLoc.class);
-                        startActivity(intent);
-                        finish();
+                        intent = new Intent(RedirectMapActivity.this, MapsActivityNoLoc.class);
+                        
                     }
                 }
 
@@ -89,9 +105,8 @@ public class RedirectMapActivity extends AppCompatActivity implements OnMapReady
                     if (isGPSEnable()) {
                         //verifie que l'utilisateur a le gps d'activé
                         Log.d(tag, "GPS is enable");
-                        Intent intent = new Intent(RedirectMapActivity.this, MapsFragment.class);
-                        startActivity(intent);
-                        finish();
+                        intent = new Intent(RedirectMapActivity.this, MapsFragment.class);
+                        
 
                     } else {
                         Log.d(tag, "GPS is not enable");
@@ -99,25 +114,27 @@ public class RedirectMapActivity extends AppCompatActivity implements OnMapReady
                         if (isGPSEnable()) {
                             //verifie que l'utilisateur a le gps d'activé
                             Log.d(tag, "GPS is enable");
-                            Intent intent = new Intent(RedirectMapActivity.this, MapsFragment.class);
-                            startActivity(intent);
-                            finish();
+                            intent = new Intent(RedirectMapActivity.this, MapsFragment.class);
+                            
 
                         } else {
                             Log.d(tag, "GPS is not enable");
-                            Intent intent = new Intent(RedirectMapActivity.this, MapsActivityNoLoc.class);
-                            startActivity(intent);
-                            finish();
+                            intent = new Intent(RedirectMapActivity.this, MapsActivityNoLoc.class);
+                            
                         }
                     }
                 }else{
-                    Intent intent = new Intent(RedirectMapActivity.this, MapsActivityNoLoc.class);
-                    startActivity(intent);
-                    finish();
+                    intent = new Intent(RedirectMapActivity.this, MapsActivityNoLoc.class);
+                    
                 }
+                
 
             }
         }
+        startActivity(intent);
+        finish();
+
+
     }
     private void requestLocPermission() {
         /**
@@ -224,4 +241,9 @@ public class RedirectMapActivity extends AppCompatActivity implements OnMapReady
     public void onMapReady(@NonNull GoogleMap googleMap) {
 
     }
+
+
+
+
+
 }

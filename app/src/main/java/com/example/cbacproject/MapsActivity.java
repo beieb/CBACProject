@@ -15,6 +15,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentSender;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.location.LocationManager;
 import android.os.Build;
@@ -74,7 +75,11 @@ public class MapsActivity extends AppCompatActivity  implements OnMapReadyCallba
 
     private int LOCATION_PERMISSION_CODE =1;
     private LocationRequest locationRequest;
-    List<circuit> listCircuit;
+    private List<circuit> listCircuit;
+    private SharedPreferences sharePref;
+    public static final String mypref = "mypref";
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -120,7 +125,6 @@ public class MapsActivity extends AppCompatActivity  implements OnMapReadyCallba
                                                 int index = locationResult.getLocations().size()-1;
                                                 lat= locationResult.getLocations().get(index).getLatitude();
                                                 lon= locationResult.getLocations().get(index).getLongitude();
-                                                Log.d(tag, lat+" "+ lon);
                                                 map = findViewById(R.id.map);
 
                                                 SupportMapFragment mapFragment= (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
@@ -293,8 +297,7 @@ public class MapsActivity extends AppCompatActivity  implements OnMapReadyCallba
     @Override
     public void onMapReady(@NonNull GoogleMap googleMap) {
         this.gMap = googleMap;
-        Log.d(tag, lat+" "+ lon);
-
+        Save();
         LatLng mapFr = new LatLng(lat, lon);
         this.gMap.addMarker(new MarkerOptions().position(mapFr).title("ME").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));
         this.gMap.moveCamera(CameraUpdateFactory.newLatLng(mapFr));
@@ -304,7 +307,17 @@ public class MapsActivity extends AppCompatActivity  implements OnMapReadyCallba
 
 
     }
+    public void Save(){
+        SharedPreferences sharedPreferences = getSharedPreferences(mypref,
+                Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        Log.d("MapsLocGet", String.valueOf(lon));
+        editor.putString("Lat", String.valueOf(lat));
+        editor.putString("Lon", String.valueOf(lon));
+        editor.commit();
+        Toast.makeText(this, "Sauvegarde !", Toast.LENGTH_LONG).show();
 
+    }
     private void definePoint(List<circuit> list){
         for(int j =0; j<list.size(); j++){
             String nom = list.get(j).getNom();
@@ -345,30 +358,34 @@ public class MapsActivity extends AppCompatActivity  implements OnMapReadyCallba
     }
 
     private void display(String toDisplay) throws JSONException {
+        if(toDisplay.equals("Erreur ")){
+            Toast.makeText(this, "Impossible de trouver ou sont les circuits", Toast.LENGTH_LONG).show();
+        }else {
 
-        Log.d("createCircuit", toDisplay);
-        JSONObject root = new JSONObject(toDisplay);
+            Log.d("createCircuit", toDisplay);
+            JSONObject root = new JSONObject(toDisplay);
 
-        JSONObject MRdata = root.getJSONObject("MRData");
-        JSONObject CircuitTable = MRdata.getJSONObject("CircuitTable");
-        JSONArray circuits = CircuitTable.getJSONArray("Circuits");
+            JSONObject MRdata = root.getJSONObject("MRData");
+            JSONObject CircuitTable = MRdata.getJSONObject("CircuitTable");
+            JSONArray circuits = CircuitTable.getJSONArray("Circuits");
 
-        String nom;
-        String lat;
-        String lon;
+            String nom;
+            String lat;
+            String lon;
 
-        for(int i=0;i<circuits.length();i++){
+            for (int i = 0; i < circuits.length(); i++) {
 
-            JSONObject circuit = circuits.getJSONObject(i);
-            nom = circuit.getString("circuitName");
-            JSONObject location = circuit.getJSONObject("Location");
+                JSONObject circuit = circuits.getJSONObject(i);
+                nom = circuit.getString("circuitName");
+                JSONObject location = circuit.getJSONObject("Location");
 
-            lat = location.getString("lat");
-            lon = location.getString("long");
-            circuit c = new circuit(nom, lat, lon);
-            listCircuit.add(c);
+                lat = location.getString("lat");
+                lon = location.getString("long");
+                circuit c = new circuit(nom, lat, lon);
+                listCircuit.add(c);
+            }
+            definePoint(listCircuit);
         }
-        definePoint(listCircuit);
 
 
     }

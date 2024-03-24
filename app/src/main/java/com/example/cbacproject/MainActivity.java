@@ -143,23 +143,26 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void display(String toDisplay) throws JSONException {
-        String result = null;
+        if(toDisplay.equals("Erreur ")){
+            this.circuit.setText(toDisplay);
+        }else {
+            String result = null;
 
-        JSONObject root = new JSONObject(toDisplay);
-        JSONObject MRData = root.getJSONObject("MRData");
-        JSONObject RaceTable = MRData.getJSONObject("RaceTable");
-        JSONArray Races = RaceTable.getJSONArray("Races");
-        JSONObject race =Races.getJSONObject(0);
-        JSONArray Results = race.getJSONArray("Results");
-        JSONObject Drivers = Results.getJSONObject(0);
-        JSONObject Driver = Drivers.getJSONObject("Driver");
-        String givenName = Driver.getString("givenName");
-        String familyName = Driver.getString("familyName");
+            JSONObject root = new JSONObject(toDisplay);
+            JSONObject MRData = root.getJSONObject("MRData");
+            JSONObject RaceTable = MRData.getJSONObject("RaceTable");
+            JSONArray Races = RaceTable.getJSONArray("Races");
+            JSONObject race = Races.getJSONObject(0);
+            JSONArray Results = race.getJSONArray("Results");
+            JSONObject Drivers = Results.getJSONObject(0);
+            JSONObject Driver = Drivers.getJSONObject("Driver");
+            String givenName = Driver.getString("givenName");
+            String familyName = Driver.getString("familyName");
 
-        result = givenName + "\n" + familyName;
+            result = givenName + "\n" + familyName;
 
-        this.circuit.setText(result);
-
+            this.circuit.setText(result);
+        }
     }
     public String getDataFromHTTP(String param){
         StringBuilder result = new StringBuilder();

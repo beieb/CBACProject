@@ -14,6 +14,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentSender;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.location.LocationManager;
 import android.os.Build;
@@ -69,12 +70,12 @@ public class MapsActivityNoLoc extends AppCompatActivity implements OnMapReadyCa
     FrameLayout map;
     private double lat;
     private double lon;
-    private LocationCallback locationCallback;
-    private String tag = "PermissionApplication";
-
-    private int LOCATION_PERMISSION_CODE = 1;
     private LocationRequest locationRequest;
     private List<circuit> listCircuit;
+    private SharedPreferences sharePref;
+    public static final String mypref = "mypref";
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -155,6 +156,14 @@ public class MapsActivityNoLoc extends AppCompatActivity implements OnMapReadyCa
     }
 
     private void definePoint(List<circuit> list){
+        Get();
+        Log.d("MapsLocGet", String.valueOf(lon));
+        if(lat!=-100000 & lon!=-100000){
+            LatLng latLng = new LatLng(lat, lon);
+            this.gMap.addMarker(new MarkerOptions().position(latLng).title("Me").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));
+
+        }
+
         for(int j =0; j<list.size(); j++){
             String nom = list.get(j).getNom();
             String lat = list.get(j).getLat();
@@ -163,6 +172,15 @@ public class MapsActivityNoLoc extends AppCompatActivity implements OnMapReadyCa
 
             this.gMap.addMarker(new MarkerOptions().position(latLng).title(nom).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA)));
 
+        }
+    }
+    public void Get(){
+        Log.d("resume", "startGet");
+
+        sharePref=getSharedPreferences(mypref, Context.MODE_PRIVATE);
+        if(sharePref.contains("Lat") & sharePref.contains("Lon")){
+            lat = Double.parseDouble(sharePref.getString("Lat","-100000"));
+            lon = Double.parseDouble(sharePref.getString("Lon", "-100000"));
         }
     }
 

@@ -144,4 +144,29 @@ public class Course {
     public void setConstructorThird(String constructorThird) {
         this.constructorThird = constructorThird;
     }
+
+    /*
+     String name, String season, String round, String locality, String country, String first, String firstTime,
+     String constructorFirst, String second, String secondTime, String constructorSecond, String third, String thirdTime, String constructorThird
+     */
+    @Override
+    public String toString(){
+        String result = "";
+        result += "Nom : " + this.getName() + "\n";
+        result += "Saison : " + this.getSeason() + "\n";
+        result += "round : " + this.getRound() + "\n";
+        result += "Lieu : " + this.getLocality() + "\n";
+        result += "Pays : " + this.getCountry() + "\n";
+        result += "Premier : " + this.getFirst() + "\n";
+        result += "Temps du premier : " + this.getFirstTime() + "\n";
+        result += "Constructeur du premier : " + this.getConstructorFirst() + "\n";
+        result += "second : " + this.getSecond() + "\n";
+        result += "Temps du second : " + this.getSecondTime() + "\n";
+        result += "Constructeur du second : " + this.getConstructorSecond() + "\n";
+        result += "troisième : " + this.getThird() + "\n";
+        result += "Temps du troisième : " + this.getThirdTime() + "\n";
+        result += "Constructeur du troisième : " + this.getConstructorThird() + "\n";
+
+        return result;
+    }
 }

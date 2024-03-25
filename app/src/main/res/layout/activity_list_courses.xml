@@ -10,6 +10,7 @@
         android:id="@+id/year"
         android:layout_toStartOf="@+id/searchButton"
         android:hint="ENTREZ L'ANNEE DE LA SAISON SOUHAITEZ"
+        android:inputType="number"
         />
     <Button
         android:id="@+id/searchButton"
@@ -32,13 +33,13 @@
         android:layout_height="wrap_content"
         android:layout_above="@+id/mytoolbar"
         android:layout_below="@id/year">
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             tools:context=".quizActivity"
             android:orientation="vertical"
-            android:id="@+id/layoutQuizIn">
-        </RelativeLayout>
+            android:id="@+id/layoutListeCourseIn">
+        </LinearLayout>
     </ScrollView>
     <androidx.appcompat.widget.Toolbar
 

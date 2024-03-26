@@ -156,13 +156,13 @@ public class MapsActivityNoLoc extends AppCompatActivity implements OnMapReadyCa
     }
 
     private void definePoint(List<circuit> list){
-/*        Get();
+        Get();
         Log.d("MapsLocGet", String.valueOf(lon));
         if(lat!=0.0 & lon!=0.0){
             LatLng latLng = new LatLng(lat, lon);
             this.gMap.addMarker(new MarkerOptions().position(latLng).title("Me").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));
 
-        }*/
+        }
 
         for(int j =0; j<list.size(); j++){
             String nom = list.get(j).getNom();

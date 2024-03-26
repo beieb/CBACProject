@@ -138,6 +138,7 @@ public class RedirectMapActivity extends AppCompatActivity implements OnMapReady
                 Log.d(tag, "Permission not GRANTED");
                 Intent intent = new Intent(RedirectMapActivity.this, MapsActivityNoLoc.class);
                 sActivity(intent);
+                //requestLocPermission();
             }
         }
     }

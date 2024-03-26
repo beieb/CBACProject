@@ -137,8 +137,9 @@ public class MapsActivity extends AppCompatActivity  implements OnMapReadyCallba
 
                 }else {
                     Log.d(tag, "GPS is not enable");
-
-                    turnOnGPS();
+                    Intent intent = new Intent(MapsActivity.this, RedirectMapActivity.class);
+                    startActivity(intent);
+                    finish();
                 }
 
             }else{

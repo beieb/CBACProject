@@ -243,48 +243,6 @@ public class MapsActivity extends AppCompatActivity  implements OnMapReadyCallba
         }
     }
 
-    private void turnOnGPS() {
-
-        Log.d(tag, "turnOnGPS");
-
-
-        LocationSettingsRequest.Builder builder = new LocationSettingsRequest.Builder()
-                .addLocationRequest(locationRequest);
-        builder.setAlwaysShow(true);
-
-        Task<LocationSettingsResponse> result = LocationServices.getSettingsClient(getApplicationContext())
-                .checkLocationSettings(builder.build());
-
-        result.addOnCompleteListener(new OnCompleteListener<LocationSettingsResponse>() {
-            @Override
-            public void onComplete(@NonNull Task<LocationSettingsResponse> task) {
-
-                try {
-                    LocationSettingsResponse response = task.getResult(ApiException.class);
-                    Toast.makeText(MapsActivity.this, "GPS is already tured on", Toast.LENGTH_SHORT).show();
-
-                } catch (ApiException e) {
-
-                    switch (e.getStatusCode()) {
-                        case LocationSettingsStatusCodes.RESOLUTION_REQUIRED:
-
-                            try {
-                                ResolvableApiException resolvableApiException = (ResolvableApiException) e;
-                                resolvableApiException.startResolutionForResult(MapsActivity.this, 2);
-                            } catch (IntentSender.SendIntentException ex) {
-                                ex.printStackTrace();
-                            }
-                            break;
-
-                        case LocationSettingsStatusCodes.SETTINGS_CHANGE_UNAVAILABLE:
-                            //Device does not have location
-                            break;
-                    }
-                }
-            }
-        });
-    }
-
     private boolean isGPSEnable(){
         LocationManager lM = null;
         boolean isEnable =false;
@@ -315,9 +273,7 @@ public class MapsActivity extends AppCompatActivity  implements OnMapReadyCallba
         Log.d("MapsLocGet", String.valueOf(lon));
         editor.putString("Lat", String.valueOf(lat));
         editor.putString("Lon", String.valueOf(lon));
-        editor.commit();
-        Toast.makeText(this, "Sauvegarde !", Toast.LENGTH_LONG).show();
-
+        editor.apply();
     }
     private void definePoint(List<circuit> list){
         for(int j =0; j<list.size(); j++){

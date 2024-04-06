@@ -86,7 +86,7 @@ public class DailyCatFact extends AppCompatActivity {
             String end = "Erreur";
             TextView tw = findViewById(R.id.Dailycatfact);
             if (toDisplay.equals("Erreur ")) {
-                tw.setText(end);
+                tw.setText("Impossible d'obtenir un fait sur les chats pour le moment");
             } else {
                 JSONObject root = new JSONObject(toDisplay);
                 Log.d("DailyCatFact", end);

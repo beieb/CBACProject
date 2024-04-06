@@ -212,31 +212,34 @@ public class MapsActivityNoLoc extends AppCompatActivity implements OnMapReadyCa
     }
 
     private void display(String toDisplay) throws JSONException {
+        if(toDisplay.equals("Erreur ")){
+            Toast.makeText(this, "Impossible de trouver ou sont les circuits", Toast.LENGTH_LONG).show();
+        }else {
 
-        Log.d("createCircuit", toDisplay);
-        JSONObject root = new JSONObject(toDisplay);
+            Log.d("createCircuit", toDisplay);
+            JSONObject root = new JSONObject(toDisplay);
 
-        JSONObject MRdata = root.getJSONObject("MRData");
-        JSONObject CircuitTable = MRdata.getJSONObject("CircuitTable");
-        JSONArray circuits = CircuitTable.getJSONArray("Circuits");
+            JSONObject MRdata = root.getJSONObject("MRData");
+            JSONObject CircuitTable = MRdata.getJSONObject("CircuitTable");
+            JSONArray circuits = CircuitTable.getJSONArray("Circuits");
 
-        String nom;
-        String lat;
-        String lon;
+            String nom;
+            String lat;
+            String lon;
 
-        for(int i=0;i<circuits.length();i++){
+            for (int i = 0; i < circuits.length(); i++) {
 
-            JSONObject circuit = circuits.getJSONObject(i);
-            nom = circuit.getString("circuitName");
-            JSONObject location = circuit.getJSONObject("Location");
+                JSONObject circuit = circuits.getJSONObject(i);
+                nom = circuit.getString("circuitName");
+                JSONObject location = circuit.getJSONObject("Location");
 
-            lat = location.getString("lat");
-            lon = location.getString("long");
-            circuit c = new circuit(nom, lat, lon);
-            listCircuit.add(c);
+                lat = location.getString("lat");
+                lon = location.getString("long");
+                circuit c = new circuit(nom, lat, lon);
+                listCircuit.add(c);
+            }
+            definePoint(listCircuit);
         }
-        definePoint(listCircuit);
-
 
     }
     public String getDataFromHTTP(String param){

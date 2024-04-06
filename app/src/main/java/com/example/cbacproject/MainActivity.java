@@ -116,8 +116,8 @@ public class MainActivity extends AppCompatActivity {
         finish();
     }
     public void go(View view) {
-
         call("https://ergast.com/api/f1/current/last/results.json");
+
     }
     public void call(String param){
         Log.d("apisMap", "-------------");
@@ -144,7 +144,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void display(String toDisplay) throws JSONException {
         if(toDisplay.equals("Erreur ")){
-            this.circuit.setText(toDisplay);
+            this.circuit.setText("Impossible d'obtenir cette information");
         }else {
             String result = null;
 

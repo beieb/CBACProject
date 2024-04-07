@@ -1,8 +1,6 @@
 <resources>
     <string name="app_name">CBACProject</string>
-    <string name="pastille" />
     <string name="titlehomepage">CBAC</string>
-    <string name="phraseacroche">PASHRE D\'AHCCCROE</string>
     <string name="Connexion">CONNEXION</string>
     <string name="home">HOME</string>
     <string name="user">USER</string>
@@ -10,7 +8,7 @@
     <string name="mountaineer">MOUNTAINEER</string>
     <string name="show_map">show map</string>
     <string name="car">car</string>
-    <string name="circuit">hello\nverstappen</string>
+    <string name="circuit">Impossible d\'obtenir cette information</string>
     <string name="mapToolbar">Map</string>
     <string name="title_activity_map">mapActivity</string>
     <string name="title_activity_maps_activitywhithout_loc">MapsActivitywhithoutLoc</string>

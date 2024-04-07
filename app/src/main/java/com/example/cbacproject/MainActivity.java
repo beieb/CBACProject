@@ -3,6 +3,7 @@ package com.example.cbacproject;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -143,7 +144,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void display(String toDisplay) throws JSONException {
-        if(toDisplay.equals("Erreur ")){
+        if(toDisplay.equals("Erreur ") ||toDisplay.equals("Erreur")){
             this.circuit.setText("Impossible d'obtenir cette information");
         }else {
             String result = null;

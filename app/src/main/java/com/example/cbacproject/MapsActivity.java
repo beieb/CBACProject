@@ -70,13 +70,11 @@ public class MapsActivity extends AppCompatActivity  implements OnMapReadyCallba
     FrameLayout map;
     private double lat;
     private double lon;
-    private LocationCallback locationCallback;
     private String tag = "PermissionApplication";
 
     private int LOCATION_PERMISSION_CODE =1;
     private LocationRequest locationRequest;
     private List<circuit> listCircuit;
-    private SharedPreferences sharePref;
     public static final String mypref = "mypref";
 
 

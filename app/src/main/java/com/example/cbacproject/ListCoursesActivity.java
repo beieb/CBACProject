@@ -3,12 +3,19 @@ package com.example.cbacproject;
 import static java.lang.Integer.parseInt;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
+import android.annotation.SuppressLint;
+import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -25,17 +32,46 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class ListCoursesActivity extends AppCompatActivity {
     //private String data1;
     //private String data2;
+    private EditText erreurAPI;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_courses);
         //call("https://ergast.com/api/f1/2024/results.json");
+        erreurAPI = new EditText(getApplicationContext());
+        erreurAPI.setText("API Innaccessible, encore...\nVeuillez réessayer dans quelques jours....");
+        erreurAPI.setVisibility(View.INVISIBLE);
+        LinearLayout layout = findViewById(R.id.layoutListeCourseIn);
+        layout.addView(erreurAPI);
+
+        //Initialisation toolbar
+        Toolbar myToolbar = findViewById(R.id.mytoolbar);
+
+        setSupportActionBar(myToolbar);
+        getSupportActionBar().setLogo(R.mipmap.ic_launcher);
+        getSupportActionBar().setTitle("Course");
     }
+
+    /**
+     * initialisation Toolbar
+     */
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu){
+        /**
+         * initialisation Toolbar
+         */
+        super.onCreateOptionsMenu(menu);
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.toolbar, menu);
+        return true;
+    }
+
     public void call(String param){
         ExecutorService ex= Executors.newSingleThreadExecutor();
         Handler handler = new Handler(Looper.getMainLooper());
@@ -47,7 +83,8 @@ public class ListCoursesActivity extends AppCompatActivity {
 
                     display(data);
                 } catch (JSONException e) {
-                    throw new RuntimeException(e);
+                    //throw new RuntimeException(e);
+                    erreurAPI.setVisibility(View.VISIBLE);
                 }
             });
         });
@@ -154,7 +191,6 @@ public class ListCoursesActivity extends AppCompatActivity {
             generateTextView(i, layout, course.toString());
 
         }
-        Log.d("aide", "finito");
     }
 
     public void searchSeason(View view) {
@@ -173,7 +209,7 @@ public class ListCoursesActivity extends AppCompatActivity {
         } else {
             tw.setVisibility(View.VISIBLE);
         }
-        call("https://ergast.com/api/f1/" + annee + "/results.json?limit=70");
+        call("https://ergast.com/api/f1/" + annee + "/results.json?limit=999");
 
 
         //return 2024;
@@ -181,10 +217,14 @@ public class ListCoursesActivity extends AppCompatActivity {
 
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     private void generateTextView(int index, LinearLayout layout, String text){
         EditText editText = new EditText(getApplicationContext());
+        editText.setOnTouchListener(new OnSwipeTouchListener(ListCoursesActivity.this) { @Override public void onSwipeLeft() {
+                editText.setText("OLSAALALALALLA : " + index);}});
         editText.setText(text);
         editText.setId(index);
         layout.addView(editText);
     }
+
 }

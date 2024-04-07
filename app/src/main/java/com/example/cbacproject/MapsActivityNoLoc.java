@@ -1,27 +1,15 @@
 package com.example.cbacproject;
 
-import static android.Manifest.permission.ACCESS_FINE_LOCATION;
 import static java.lang.Double.parseDouble;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.app.ActivityCompat;
-import androidx.fragment.app.FragmentActivity;
-
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.IntentSender;
 import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
-import android.location.LocationManager;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -29,31 +17,16 @@ import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.google.android.gms.common.api.ApiException;
-import com.google.android.gms.common.api.ResolvableApiException;
-import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationRequest;
-import com.google.android.gms.location.LocationResult;
-import com.google.android.gms.location.LocationServices;
-import com.google.android.gms.location.LocationSettingsRequest;
-import com.google.android.gms.location.LocationSettingsResponse;
-import com.google.android.gms.location.LocationSettingsStatusCodes;
-import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.example.cbacproject.databinding.ActivityMapsNoLocBinding;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -114,24 +87,19 @@ public class MapsActivityNoLoc extends AppCompatActivity implements OnMapReadyCa
         /**
          * mise en place des réponse en cas de click sur les boutons de la toolbar
          */
-        TextView txt;
         if (item.getItemId() == R.id.home) {
-            Log.d("CBAC", "home yes");
             Intent intent = new Intent(MapsActivityNoLoc.this, MainActivity.class);
             startActivity(intent);
             return true;
         } else if (item.getItemId() == R.id.cat) {
-            Log.d("CBAC", "user yes");
             Intent intent = new Intent(MapsActivityNoLoc.this, DailyCatFact.class);
             startActivity(intent);
             return true;
         } else if (item.getItemId() == R.id.map) {
-            Log.d("CBAC", "map yes");
             Intent intent = new Intent(MapsActivityNoLoc.this, RedirectMapActivity.class);
             startActivity(intent);
             return true;
         } else if (item.getItemId() == R.id.car) {
-            Log.d("CBAC", "mountaineer yes");
             return true;
         }
         return false;
@@ -157,7 +125,6 @@ public class MapsActivityNoLoc extends AppCompatActivity implements OnMapReadyCa
 
     private void definePoint(List<circuit> list){
         Get();
-        Log.d("MapsLocGet", String.valueOf(lon));
         if(lat!=0.0 & lon!=0.0){
             LatLng latLng = new LatLng(lat, lon);
             this.gMap.addMarker(new MarkerOptions().position(latLng).title("Me").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));
@@ -175,8 +142,6 @@ public class MapsActivityNoLoc extends AppCompatActivity implements OnMapReadyCa
         }
     }
     public void Get(){
-        Log.d("resume", "startGet");
-
         sharePref=getSharedPreferences(mypref, Context.MODE_PRIVATE);
         if(sharePref.contains("Lat") & sharePref.contains("Lon")){
             lat = Double.parseDouble(sharePref.getString("Lat","-100000"));
@@ -189,8 +154,6 @@ public class MapsActivityNoLoc extends AppCompatActivity implements OnMapReadyCa
         call("https://ergast.com/api/f1/circuits.json?limit=80");
     }
     public void call(String param){
-        Log.d("apisMap", "-------------");
-
         ExecutorService ex= Executors.newSingleThreadExecutor();
         Handler handler = new Handler(Looper.getMainLooper());
         ex.execute(new Runnable() {
@@ -215,8 +178,6 @@ public class MapsActivityNoLoc extends AppCompatActivity implements OnMapReadyCa
         if(toDisplay.equals("Erreur ")){
             Toast.makeText(this, "Impossible de trouver ou sont les circuits", Toast.LENGTH_LONG).show();
         }else {
-
-            Log.d("createCircuit", toDisplay);
             JSONObject root = new JSONObject(toDisplay);
 
             JSONObject MRdata = root.getJSONObject("MRData");

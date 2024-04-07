@@ -3,12 +3,10 @@ package com.example.cbacproject;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -67,7 +65,6 @@ public class MainActivity extends AppCompatActivity {
         wv.loadUrl("https://www.fia.com/calendar");
         WebViewClient wvc = new WebViewClient();
         wv.setWebViewClient(wvc);
-        Log.d("Home_page", "ha");
         go(this.getCurrentFocus());
 
     }
@@ -87,25 +84,21 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         TextView txt;
         if (item.getItemId() == R.id.home) {
-            Log.d("CBAC", "home yes");
             Intent intent = new Intent(MainActivity.this, MainActivity.class);
             startActivity(intent);
             finish();
             return true;
         } else if (item.getItemId() == R.id.cat){
-            Log.d("CBAC", "user yes");
             Intent intent = new Intent(MainActivity.this, DailyCatFact.class);
             startActivity(intent);
             finish();
             return true;
         }else if (item.getItemId() == R.id.map) {
-            Log.d("CBAC", "map yes");
             Intent intent = new Intent(MainActivity.this, RedirectMapActivity.class);
             startActivity(intent);
             finish();
             return true;
         } else if (item.getItemId() == R.id.car){
-            Log.d("CBAC", "mountaineer yes");
             return true;
         }
         return false;
@@ -121,8 +114,6 @@ public class MainActivity extends AppCompatActivity {
 
     }
     public void call(String param){
-        Log.d("apisMap", "-------------");
-
         ExecutorService ex= Executors.newSingleThreadExecutor();
         Handler handler = new Handler(Looper.getMainLooper());
         ex.execute(new Runnable() {

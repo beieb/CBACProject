@@ -13,7 +13,6 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -157,25 +156,22 @@ public class DailyCatFact extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         TextView txt;
         if (item.getItemId() == R.id.home) {
-            Log.d("CBAC", "home yes");
             Intent intent = new Intent(DailyCatFact.this, MainActivity.class);
             startActivity(intent);
             finish();
             return true;
         } else if (item.getItemId() == R.id.cat){
-            Log.d("CBAC", "user yes");
             Intent intent = new Intent(DailyCatFact.this, DailyCatFact.class);
             startActivity(intent);
             finish();
             return true;
         }else if (item.getItemId() == R.id.map) {
-            Log.d("CBAC", "map yes");
+
             Intent intent = new Intent(DailyCatFact.this, MapsActivity.class);
             startActivity(intent);
             finish();
             return true;
         } else if (item.getItemId() == R.id.car){
-            Log.d("CBAC", "mountaineer yes");
             return true;
         }
         return false;

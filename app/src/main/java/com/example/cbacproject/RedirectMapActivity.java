@@ -6,7 +6,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
-
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -16,9 +15,7 @@ import android.content.pm.PackageManager;
 import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.Toast;
-
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.common.api.ResolvableApiException;
 import com.google.android.gms.location.LocationRequest;
@@ -30,7 +27,6 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -56,27 +52,22 @@ public class RedirectMapActivity extends AppCompatActivity implements OnMapReady
     }
 
     private void chooseActivity(){
-        Log.d("createCircuit", String.valueOf(list.size()));
         Intent intent = null;
 
         if(Build.VERSION.SDK_INT>= Build.VERSION_CODES.M){
             if(ActivityCompat.checkSelfPermission(RedirectMapActivity.this, ACCESS_FINE_LOCATION)== PackageManager.PERMISSION_GRANTED){
                 //verifie que l'utilisateur a donnée la permission pour la localisation
-                Log.d(tag, "you have already this permission");
                 if (isGPSEnable()){
                     //verifie que l'utilisateur a le gps d'activé
-                    Log.d(tag, "GPS is enable");
                     intent = new Intent(RedirectMapActivity.this, MapsActivity.class);
                     sActivity(intent);
 
                 }else {
-                    Log.d(tag, "GPS is not enable");
                     locationRequest = LocationRequest.create();
                     locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
                     turnOnGPS();
                 }
             }else{
-                Log.d(tag, "you don't have already this permission");
                 requestLocPermission();
             }
         }
@@ -86,21 +77,14 @@ public class RedirectMapActivity extends AppCompatActivity implements OnMapReady
         /**
          * demande la permission d'utilisation du gps
          */
-        Log.d(tag, String.valueOf(ActivityCompat.shouldShowRequestPermissionRationale(this, ACCESS_FINE_LOCATION)));
         if(ActivityCompat.shouldShowRequestPermissionRationale(this, ACCESS_FINE_LOCATION)){
-            Log.d(tag, "if request");
-
             new AlertDialog.Builder(this)
                     .setTitle("permission needed")
                     .setMessage("please let us use permission")
                     .setPositiveButton("ok", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            Log.d(tag, "requestPermissionButtonOk");
-
                             ActivityCompat.requestPermissions(RedirectMapActivity.this,new String[]{ACCESS_FINE_LOCATION}, LOCATION_PERMISSION_CODE);
-                            Log.d(tag, "requestPermissionButtonOkclick");
-
                         }
                     })
                     .setNegativeButton("cancel", new DialogInterface.OnClickListener() {
@@ -127,7 +111,6 @@ public class RedirectMapActivity extends AppCompatActivity implements OnMapReady
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (requestCode == LOCATION_PERMISSION_CODE) {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                Log.d(tag, "Permission GRANTED");
                 if(isGPSEnable()){
                     Intent intent = new Intent(RedirectMapActivity.this, MapsActivity.class);
                     sActivity(intent);
@@ -135,7 +118,6 @@ public class RedirectMapActivity extends AppCompatActivity implements OnMapReady
                     turnOnGPS();
                 }
             } else {
-                Log.d(tag, "Permission not GRANTED");
                 Intent intent = new Intent(RedirectMapActivity.this, MapsActivityNoLoc.class);
                 sActivity(intent);
                 //requestLocPermission();
@@ -144,10 +126,6 @@ public class RedirectMapActivity extends AppCompatActivity implements OnMapReady
     }
 
     private void turnOnGPS() {
-
-
-        Log.d(tag, "turnOnGPS");
-
 
         LocationSettingsRequest.Builder builder = new LocationSettingsRequest.Builder()
                 .addLocationRequest(locationRequest);

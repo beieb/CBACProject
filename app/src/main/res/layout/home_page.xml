@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <FrameLayout
+        android:id="@+id/frame"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:layout_above="@id/frame2"
+        >
+        <WebView
+            android:id="@+id/webview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            />
+
+
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/frame2"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_above="@id/mytoolbar">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/textResult"
+                android:hint="@string/textResult"
+                android:gravity="center"
+                />
+            <TextView
+                android:id="@+id/circuit"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textSize="64sp"
+                android:hint="@string/circuit"
+                android:gravity="center"
+                />
+
+    </FrameLayout>
+
+    <androidx.appcompat.widget.Toolbar
+
+        android:id="@+id/mytoolbar"
+        android:layout_height="50dp"
+        android:layout_width="match_parent"
+        android:elevation="4dp"
+        android:theme="?attr/actionBarTheme"
+        android:layout_alignParentBottom="true"
+        android:title="@string/home"
+        android:background="@color/purplelogo"
+
+
+        />
+
+</RelativeLayout>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools" tools:context=".MainActivity">
+    <item
+        android:id="@+id/home" android:icon="@drawable/home"
+        app:showAsAction="always" android:title="@string/home"/>
+    <item
+        android:id="@+id/cat" android:icon="@drawable/cat"
+        app:showAsAction="always" android:title="@string/cat"/>
+    <item
+        android:id="@+id/map" android:icon="@drawable/map"
+        app:showAsAction="always" android:title="@string/map"/>
+    <item
+        android:id="@+id/car" android:icon="@drawable/car"
+        app:showAsAction="always" android:title="@string/car"/>
+</menu>

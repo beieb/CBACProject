@@ -32,11 +32,8 @@ import java.util.List;
 
 public class RedirectMapActivity extends AppCompatActivity implements OnMapReadyCallback {
 
-    private String tag = "PermissionApplication";
-
     private int LOCATION_PERMISSION_CODE =1;
     private LocationRequest locationRequest;
-    private List<circuit> list= new ArrayList<circuit>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

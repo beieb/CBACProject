@@ -34,7 +34,6 @@ import java.util.concurrent.Executors;
 public class MainActivity extends AppCompatActivity {
 
     private TextView circuit;
-    private TextView winner;
 
     /**
      *
@@ -104,11 +103,6 @@ public class MainActivity extends AppCompatActivity {
         return false;
     }
 
-    public void goOnRace(View v){
-        Intent intent = new Intent(MainActivity.this, raceActivity.class);
-        startActivity(intent);
-        finish();
-    }
     public void go(View view) {
         call("https://ergast.com/api/f1/current/last/results.json");
 

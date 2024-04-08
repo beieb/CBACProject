@@ -17,7 +17,7 @@
         android:theme="@style/Theme.CBACProject"
         tools:targetApi="31">
         <activity
-            android:name=".Parametre"
+            android:name=".ParametreActivity"
             android:exported="false" />
         <activity
             android:name=".raceActivity"

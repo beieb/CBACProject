@@ -6,6 +6,26 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     tools:ignore="MissingDefaultResource">
 
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/addTitle"
+        android:layout_above="@+id/addContext"/>
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/addContext"
+        android:layout_above="@+id/addButton"/>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/addButton"
+        android:onClick="addPref"
+        android:layout_above="@id/scrollSave"
+        android:text="@string/addButton"
+        />
+
+
     <ScrollView
         android:id="@+id/scrollSave"
         android:layout_width="match_parent"
@@ -14,7 +34,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:context=".Parametre"
+            tools:context=".ParametreActivity"
             android:orientation="vertical"
             android:id="@+id/SaveLayout">
         </LinearLayout>

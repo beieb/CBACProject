@@ -174,7 +174,7 @@ public class MainActivity extends AppCompatActivity {
         return result.toString();
     }
     public void param(View view){
-        Intent intent = new Intent(MainActivity.this, Parametre.class);
+        Intent intent = new Intent(MainActivity.this, ParametreActivity.class);
         startActivity(intent);
     }
 }

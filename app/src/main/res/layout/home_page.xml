@@ -17,10 +17,14 @@
 
 
     </FrameLayout>
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="param"/>
+    <ImageButton
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:onClick="param"
+        android:background="@drawable/para"
+        android:layout_below="@+id/frame"
+        android:layout_alignParentRight="true"
+        />
     <FrameLayout
         android:id="@+id/frame2"
         android:layout_height="wrap_content"

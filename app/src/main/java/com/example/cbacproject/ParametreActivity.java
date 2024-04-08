@@ -3,7 +3,6 @@ package com.example.cbacproject;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -13,20 +12,14 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import java.util.Map;
-import java.util.Objects;
-import java.util.TreeMap;
 
-public class Parametre extends AppCompatActivity {
+public class ParametreActivity extends AppCompatActivity {
     private static String mypref = "mypref";
     private SharedPreferences sharePref;
     private static String tag="ParamLog";
@@ -88,6 +81,7 @@ public class Parametre extends AppCompatActivity {
         t = new TextView(getApplicationContext());
         t.setText(Label+": "+  content);
         t.setId(index);
+        t.setTextSize(20);
         CheckBox cb = new CheckBox(getApplicationContext());
         cb.setId(index+100);
         layout.addView(t);
@@ -97,13 +91,7 @@ public class Parametre extends AppCompatActivity {
 
 
 
-    public void Save(String Name, String name){
-        SharedPreferences sharedPreferences = getSharedPreferences(mypref,
-                Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString(Name, name);
-        editor.apply();
-    }
+
 
     public Map<String, ?> Get(){
         sharePref=getSharedPreferences(mypref, Context.MODE_PRIVATE);
@@ -115,17 +103,17 @@ public class Parametre extends AppCompatActivity {
          * mise en place des réponse en cas de click sur les boutons de la toolbar
          */
         if (item.getItemId() == R.id.home) {
-            Intent intent = new Intent(Parametre.this, MainActivity.class);
+            Intent intent = new Intent(ParametreActivity.this, MainActivity.class);
             startActivity(intent);
             finish();
             return true;
         } else if (item.getItemId() == R.id.cat) {
-            Intent intent = new Intent(Parametre.this, DailyCatFact.class);
+            Intent intent = new Intent(ParametreActivity.this, DailyCatFact.class);
             startActivity(intent);
             finish();
             return true;
         } else if (item.getItemId() == R.id.map) {
-            Intent intent = new Intent(Parametre.this, RedirectMapActivity.class);
+            Intent intent = new Intent(ParametreActivity.this, RedirectMapActivity.class);
             startActivity(intent);
             finish();
             return true;
@@ -148,7 +136,7 @@ public class Parametre extends AppCompatActivity {
 
     public void DeleteAll(View view){
         sharePref.edit().clear().apply();
-        Intent intent = new Intent(Parametre.this, Parametre.class);
+        Intent intent = new Intent(ParametreActivity.this, ParametreActivity.class);
         startActivity(intent);
         finish();
     }
@@ -168,9 +156,25 @@ public class Parametre extends AppCompatActivity {
 
             }
         }
-        Intent intent = new Intent(Parametre.this, Parametre.class);
+        Intent intent = new Intent(ParametreActivity.this, ParametreActivity.class);
         startActivity(intent);
         finish();
+    }
+
+    public void addPref(View view){
+        EditText title = findViewById(R.id.addTitle);
+        EditText context = findViewById(R.id.addContext);
+        Save(title.getText().toString(), context.getText().toString());
+        Intent intent = new Intent(ParametreActivity.this, ParametreActivity.class);
+        startActivity(intent);
+        finish();
+    }
+    public void Save(String Name, String name){
+        SharedPreferences sharedPreferences = getSharedPreferences(mypref,
+                Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(Name, name);
+        editor.apply();
     }
 
 }

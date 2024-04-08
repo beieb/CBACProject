@@ -150,17 +150,18 @@ public class ParametreActivity extends AppCompatActivity {
     }
 
     public void addPref(View view){
-        EditText title = findViewById(R.id.addTitle);
         EditText context = findViewById(R.id.addContext);
-        Save(title.getText().toString(), context.getText().toString());
+        sharePref = getSharedPreferences(mypref,
+                Context.MODE_PRIVATE);
+        Save("Pref"+sharePref.getAll().size(), context.getText().toString());
         Intent intent = new Intent(ParametreActivity.this, ParametreActivity.class);
         startActivity(intent);
         finish();
     }
     public void Save(String Name, String name){
-        SharedPreferences sharedPreferences = getSharedPreferences(mypref,
+        sharePref = getSharedPreferences(mypref,
                 Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
+        SharedPreferences.Editor editor = sharePref.edit();
         editor.putString(Name, name);
         editor.apply();
     }

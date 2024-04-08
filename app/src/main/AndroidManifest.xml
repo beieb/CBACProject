@@ -20,6 +20,9 @@
             android:name=".ParametreActivity"
             android:exported="false" />
         <activity
+            android:name=".ListCoursesActivity"
+            android:exported="false" />
+        <activity
             android:name=".raceActivity"
             android:exported="false" />
         <!--

@@ -4,5 +4,6 @@
     <color name="white">#FFFFFFFF</color>
     <color name="purpletitle">#B514CF</color>
     <color name="purplelogo">#510b89</color>
+    <color name="red">#FFF00000</color>
 
 </resources>

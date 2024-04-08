@@ -10,7 +10,7 @@
     android:layout_height="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/map"
-    tools:context=".MapsFragment"
+    tools:context=".MapsActivity"
     android:name="com.google.android.gms.maps.SupportMapFragment"/>
 
 

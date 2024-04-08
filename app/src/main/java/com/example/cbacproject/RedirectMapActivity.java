@@ -3,9 +3,9 @@ package com.example.cbacproject;
 import static android.Manifest.permission.ACCESS_FINE_LOCATION;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
-
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -15,135 +15,81 @@ import android.content.pm.PackageManager;
 import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Looper;
-import android.util.Log;
-import android.widget.FrameLayout;
 import android.widget.Toast;
-
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.common.api.ResolvableApiException;
-import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationRequest;
-import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.location.LocationSettingsRequest;
 import com.google.android.gms.location.LocationSettingsResponse;
 import com.google.android.gms.location.LocationSettingsStatusCodes;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import java.util.ArrayList;
+import java.util.List;
 
 public class RedirectMapActivity extends AppCompatActivity implements OnMapReadyCallback {
 
-    GoogleMap gMap;
-    FrameLayout map;
-    private double lat;
-    private double lon;
-    private LocationCallback locationCallback;
-    private String tag = "PermissionApplication";
-
     private int LOCATION_PERMISSION_CODE =1;
     private LocationRequest locationRequest;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_redirect_map);
+
+        chooseActivity();
+
+
+    }
+    private void sActivity(Intent intent){
+        startActivity(intent);
+        finish();
+    }
+
+    private void chooseActivity(){
+        Intent intent = null;
+
         if(Build.VERSION.SDK_INT>= Build.VERSION_CODES.M){
             if(ActivityCompat.checkSelfPermission(RedirectMapActivity.this, ACCESS_FINE_LOCATION)== PackageManager.PERMISSION_GRANTED){
                 //verifie que l'utilisateur a donnée la permission pour la localisation
-                Log.d(tag, "you have already this permission");
                 if (isGPSEnable()){
                     //verifie que l'utilisateur a le gps d'activé
-                    Log.d(tag, "GPS is enable");
-                    Intent intent = new Intent(RedirectMapActivity.this, MapsFragment.class);
-                    startActivity(intent);
-                    finish();
+                    intent = new Intent(RedirectMapActivity.this, MapsActivity.class);
+                    sActivity(intent);
 
                 }else {
-                    Log.d(tag, "GPS is not enable");
+                    locationRequest = LocationRequest.create();
+                    locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
                     turnOnGPS();
-                    if (isGPSEnable()) {
-                        //verifie que l'utilisateur a le gps d'activé
-                        Log.d(tag, "GPS is enable");
-                        Intent intent = new Intent(RedirectMapActivity.this, MapsFragment.class);
-                        startActivity(intent);
-                        finish();
-
-                    } else {
-                        Log.d(tag, "GPS is not enable");
-                        Intent intent = new Intent(RedirectMapActivity.this, MapsActivityNoLoc.class);
-                        startActivity(intent);
-                        finish();
-                    }
                 }
-
             }else{
-                Log.d(tag, "you don't have already this permission");
                 requestLocPermission();
-                if(ActivityCompat.checkSelfPermission(RedirectMapActivity.this, ACCESS_FINE_LOCATION)== PackageManager.PERMISSION_GRANTED) {
-                    //verifie que l'utilisateur a donnée la permission pour la localisation
-                    Log.d(tag, "you have already this permission");
-                    if (isGPSEnable()) {
-                        //verifie que l'utilisateur a le gps d'activé
-                        Log.d(tag, "GPS is enable");
-                        Intent intent = new Intent(RedirectMapActivity.this, MapsFragment.class);
-                        startActivity(intent);
-                        finish();
-
-                    } else {
-                        Log.d(tag, "GPS is not enable");
-                        turnOnGPS();
-                        if (isGPSEnable()) {
-                            //verifie que l'utilisateur a le gps d'activé
-                            Log.d(tag, "GPS is enable");
-                            Intent intent = new Intent(RedirectMapActivity.this, MapsFragment.class);
-                            startActivity(intent);
-                            finish();
-
-                        } else {
-                            Log.d(tag, "GPS is not enable");
-                            Intent intent = new Intent(RedirectMapActivity.this, MapsActivityNoLoc.class);
-                            startActivity(intent);
-                            finish();
-                        }
-                    }
-                }else{
-                    Intent intent = new Intent(RedirectMapActivity.this, MapsActivityNoLoc.class);
-                    startActivity(intent);
-                    finish();
-                }
-
             }
         }
+
     }
     private void requestLocPermission() {
         /**
          * demande la permission d'utilisation du gps
          */
-        Log.d(tag, String.valueOf(ActivityCompat.shouldShowRequestPermissionRationale(this, ACCESS_FINE_LOCATION)));
         if(ActivityCompat.shouldShowRequestPermissionRationale(this, ACCESS_FINE_LOCATION)){
-            Log.d(tag, "if request");
-
             new AlertDialog.Builder(this)
                     .setTitle("permission needed")
                     .setMessage("please let us use permission")
                     .setPositiveButton("ok", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            Log.d(tag, "requestPermissionButtonOk");
-
                             ActivityCompat.requestPermissions(RedirectMapActivity.this,new String[]{ACCESS_FINE_LOCATION}, LOCATION_PERMISSION_CODE);
-                            Log.d(tag, "requestPermissionButtonOkclick");
-
                         }
                     })
                     .setNegativeButton("cancel", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             dialog.dismiss();
+                            Intent intent = new Intent(RedirectMapActivity.this, MapsActivityNoLoc.class);
+                            sActivity(intent);
                         }
                     })
                     .create().show();
@@ -162,17 +108,21 @@ public class RedirectMapActivity extends AppCompatActivity implements OnMapReady
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (requestCode == LOCATION_PERMISSION_CODE) {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                Log.d(tag, "Permission GRANTED");
+                if(isGPSEnable()){
+                    Intent intent = new Intent(RedirectMapActivity.this, MapsActivity.class);
+                    sActivity(intent);
+                }else {
+                    turnOnGPS();
+                }
             } else {
-                Log.d(tag, "Permission not GRANTED");
+                Intent intent = new Intent(RedirectMapActivity.this, MapsActivityNoLoc.class);
+                sActivity(intent);
+                //requestLocPermission();
             }
         }
     }
 
     private void turnOnGPS() {
-
-        Log.d(tag, "turnOnGPS");
-
 
         LocationSettingsRequest.Builder builder = new LocationSettingsRequest.Builder()
                 .addLocationRequest(locationRequest);
@@ -187,8 +137,9 @@ public class RedirectMapActivity extends AppCompatActivity implements OnMapReady
 
                 try {
                     LocationSettingsResponse response = task.getResult(ApiException.class);
-                    Toast.makeText(RedirectMapActivity.this, "GPS is not tured on", Toast.LENGTH_SHORT).show();
-
+                    Toast.makeText(RedirectMapActivity.this, "GPS is already tured on", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(RedirectMapActivity.this, MapsActivity.class);
+                    sActivity(intent);
                 } catch (ApiException e) {
 
                     switch (e.getStatusCode()) {
@@ -209,6 +160,7 @@ public class RedirectMapActivity extends AppCompatActivity implements OnMapReady
                 }
             }
         });
+
     }
 
     private boolean isGPSEnable(){
@@ -221,7 +173,31 @@ public class RedirectMapActivity extends AppCompatActivity implements OnMapReady
         return isEnable;
     }
     @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 2) {
+            if (resultCode == RESULT_OK) {
+                // Le GPS a été activé avec succès
+                Toast.makeText(RedirectMapActivity.this, "GPS is turned on", Toast.LENGTH_SHORT).show();
+                // Démarrer votre activité souhaitée ici
+                Intent intent = new Intent(RedirectMapActivity.this, MapsActivity.class);
+                sActivity(intent);
+            } else {
+                // L'utilisateur a annulé l'activation du GPS
+                Toast.makeText(RedirectMapActivity.this, "User declined to turn on GPS", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(RedirectMapActivity.this, MapsActivityNoLoc.class);
+                sActivity(intent);
+            }
+        }
+    }
+
+    @Override
     public void onMapReady(@NonNull GoogleMap googleMap) {
 
     }
+
+
+
+
+
 }

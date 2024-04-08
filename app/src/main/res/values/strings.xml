@@ -1,16 +1,13 @@
 <resources>
     <string name="app_name">CBACProject</string>
-    <string name="pastille" />
     <string name="titlehomepage">CBAC</string>
-    <string name="phraseacroche">PASHRE D\'AHCCCROE</string>
-    <string name="Connexion">CONNEXION</string>
     <string name="home">HOME</string>
     <string name="user">USER</string>
     <string name="map">MAP</string>
     <string name="mountaineer">MOUNTAINEER</string>
     <string name="show_map">show map</string>
     <string name="car">car</string>
-    <string name="circuit">hello\nverstappen</string>
+    <string name="circuit">Impossible d\'obtenir cette information</string>
     <string name="mapToolbar">Map</string>
     <string name="title_activity_map">mapActivity</string>
     <string name="title_activity_maps_activitywhithout_loc">MapsActivitywhithoutLoc</string>
@@ -47,5 +44,10 @@
     <string name="timeSecondrace" />
     <string name="timeThird">Time :</string>
     <string name="timeThirddrace" />
+    <string name="textResult">VAINQUEURE DE LA DERNIERE COURSE</string>
+    <string name="DeleteAll">Tout supprimer</string>
+    <string name="DeleteSelect">Supprimer cochée</string>
+    <string name="addButton">Ajouter</string>
+    <string name="para">Parametre</string>
 
 </resources>

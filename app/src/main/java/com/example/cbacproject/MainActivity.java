@@ -5,12 +5,27 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
+import android.os.Handler;
+import android.os.Looper;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.TextView;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 /**
  * page home activity
@@ -19,7 +34,6 @@ import android.widget.TextView;
 public class MainActivity extends AppCompatActivity {
 
     private TextView circuit;
-    private TextView winner;
 
     /**
      *
@@ -44,22 +58,17 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().setTitle("HOME");
 
         circuit = findViewById(R.id.circuit);
-        /**
-         * un tableau de string contenant le nom de la course et le vainqueure a modifier avec l'apis
-         */
-        String[] s = new String[]{"hello", "world"};
-        initmlatestRace(s);
+
+        WebView wv = findViewById(R.id.webview);
+        wv.getSettings().setJavaScriptEnabled(true);
+        wv.loadUrl("https://www.fia.com/calendar");
+        WebViewClient wvc = new WebViewClient();
+        wv.setWebViewClient(wvc);
+        go(this.getCurrentFocus());
 
     }
 
 
-    private void initmlatestRace(String[] s){
-        /**
-         * prend en parametre un tableau de string contenant le nom du circuit de la derniere course
-         * et le vainqueure
-         */
-        this.circuit.setText(s[0]+"\n"+s[1]);
-    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu){
         /**
@@ -74,36 +83,103 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         TextView txt;
         if (item.getItemId() == R.id.home) {
-            Log.d("CBAC", "home yes");
             Intent intent = new Intent(MainActivity.this, MainActivity.class);
             startActivity(intent);
             finish();
             return true;
         } else if (item.getItemId() == R.id.cat){
-            Log.d("CBAC", "cat yes");
             Intent intent = new Intent(MainActivity.this, DailyCatFact.class);
             startActivity(intent);
             finish();
             return true;
         }else if (item.getItemId() == R.id.map) {
-            Log.d("CBAC", "map yes");
             Intent intent = new Intent(MainActivity.this, RedirectMapActivity.class);
             startActivity(intent);
             finish();
             return true;
         } else if (item.getItemId() == R.id.car){
-            Log.d("CBAC", "car yes");
+
             Intent intent = new Intent(MainActivity.this, ListCoursesActivity.class);
             startActivity(intent);
             finish();
+
             return true;
         }
         return false;
     }
 
-    public void goOnRace(View v){
-        Intent intent = new Intent(MainActivity.this, raceActivity.class);
+    public void go(View view) {
+        call("https://ergast.com/api/f1/current/last/results.json");
+
+    }
+    public void call(String param){
+        ExecutorService ex= Executors.newSingleThreadExecutor();
+        Handler handler = new Handler(Looper.getMainLooper());
+        ex.execute(new Runnable() {
+            @Override
+            public void run() {
+                String data = getDataFromHTTP(param);
+                handler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            display(data);
+                        } catch (JSONException e) {
+                            throw new RuntimeException(e);
+                        }
+                    }
+                });
+            }
+        });
+    }
+
+    private void display(String toDisplay) throws JSONException {
+        if(toDisplay.equals("Erreur ") ||toDisplay.equals("Erreur")){
+            this.circuit.setText("Impossible d'obtenir cette information");
+        }else {
+            String result = null;
+
+            JSONObject root = new JSONObject(toDisplay);
+            JSONObject MRData = root.getJSONObject("MRData");
+            JSONObject RaceTable = MRData.getJSONObject("RaceTable");
+            JSONArray Races = RaceTable.getJSONArray("Races");
+            JSONObject race = Races.getJSONObject(0);
+            JSONArray Results = race.getJSONArray("Results");
+            JSONObject Drivers = Results.getJSONObject(0);
+            JSONObject Driver = Drivers.getJSONObject("Driver");
+            String givenName = Driver.getString("givenName");
+            String familyName = Driver.getString("familyName");
+
+            result = givenName + "\n" + familyName;
+
+            this.circuit.setText(result);
+        }
+    }
+    public String getDataFromHTTP(String param){
+        StringBuilder result = new StringBuilder();
+        HttpURLConnection connexion = null;
+        try {
+            URL url = new URL(param);
+            connexion = (HttpURLConnection) url.openConnection();
+            connexion.setRequestMethod("GET");
+            InputStream inputStream = connexion.getInputStream();
+            InputStreamReader inputStreamReader = new
+                    InputStreamReader(inputStream);
+            BufferedReader bf = new BufferedReader(inputStreamReader);
+            String ligne = "";
+            while ((ligne = bf.readLine()) != null) {
+                result.append(ligne);
+            }
+            inputStream.close();
+            bf.close();
+            connexion.disconnect();
+        } catch (Exception e) {
+            result = new StringBuilder("Erreur ");
+        }
+        return result.toString();
+    }
+    public void param(View view){
+        Intent intent = new Intent(MainActivity.this, ParametreActivity.class);
         startActivity(intent);
-        finish();
     }
 }

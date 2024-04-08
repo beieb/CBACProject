@@ -2,19 +2,20 @@ package com.example.cbacproject;
 
 import static com.google.android.gms.tasks.Tasks.call;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.EditText;
 import android.widget.TextView;
 
 import org.json.JSONException;
@@ -25,13 +26,21 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
+import java.text.DateFormat;
+import java.text.FieldPosition;
+import java.text.ParsePosition;
+import java.util.Date;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class DailyCatFact extends AppCompatActivity {
     private TextView et;
+    private static String mypref = "mypref";
+    private SharedPreferences sharePref;
+    private static String DATE = "DateDailyCatFact";
+    private static String DCF = "DailyCatFact";
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,9 +51,33 @@ public class DailyCatFact extends AppCompatActivity {
         getSupportActionBar().setLogo(R.mipmap.ic_launcher);
         getSupportActionBar().setTitle("DCF");
 
+        Date now = new Date();
+        DateFormat dateFormatter = DateFormat.getDateInstance(DateFormat.SHORT);
+        String dateFormat = dateFormatter.format(now);
+
         et = findViewById(R.id.Dailycatfact);
-        call("https://catfact.ninja/fact");
+
+        if(dateFormat.equals(Get(DATE))){
+            display(Get(DCF));
+        } else {
+            Save(DATE, dateFormat);
+            call("https://catfact.ninja/fact");
+        }
     }
+
+    public void Save(String Name, String name){
+        SharedPreferences sharedPreferences = getSharedPreferences(mypref,
+                Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(Name, name);
+        editor.apply();
+    }
+
+    public String Get(String Name){
+        sharePref=getSharedPreferences(mypref, Context.MODE_PRIVATE);
+        return sharePref.getString(Name,"Innexistant");
+    }
+
     public void call(String param){
         ExecutorService ex= Executors.newSingleThreadExecutor();
         Handler handler = new Handler(Looper.getMainLooper());
@@ -82,6 +115,7 @@ public class DailyCatFact extends AppCompatActivity {
         } catch (Exception e) {
             result = new StringBuilder("Erreur ");
         }
+        Save(DCF, result.toString());
         return result.toString();
     }
 
@@ -90,12 +124,10 @@ public class DailyCatFact extends AppCompatActivity {
             String end = "Erreur";
             TextView tw = findViewById(R.id.Dailycatfact);
             if (toDisplay.equals("Erreur ")) {
-                tw.setText(end);
+                tw.setText("Impossible d'obtenir un fait sur les chats pour le moment");
             } else {
                 JSONObject root = new JSONObject(toDisplay);
-                Log.d("DailyCatFact", end);
                 end = root.getString("fact");
-                Log.d("DailyCatFact", end);
                 tw.setText(end);
             }
 
@@ -124,25 +156,22 @@ public class DailyCatFact extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         TextView txt;
         if (item.getItemId() == R.id.home) {
-            Log.d("CBAC", "home yes");
             Intent intent = new Intent(DailyCatFact.this, MainActivity.class);
             startActivity(intent);
             finish();
             return true;
         } else if (item.getItemId() == R.id.cat){
-            Log.d("CBAC", "user yes");
             Intent intent = new Intent(DailyCatFact.this, DailyCatFact.class);
             startActivity(intent);
             finish();
             return true;
         }else if (item.getItemId() == R.id.map) {
-            Log.d("CBAC", "map yes");
-            Intent intent = new Intent(DailyCatFact.this, MapsFragment.class);
+
+            Intent intent = new Intent(DailyCatFact.this, MapsActivity.class);
             startActivity(intent);
             finish();
             return true;
         } else if (item.getItemId() == R.id.car){
-            Log.d("CBAC", "mountaineer yes");
             return true;
         }
         return false;

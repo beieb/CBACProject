@@ -98,11 +98,9 @@ public class MainActivity extends AppCompatActivity {
             finish();
             return true;
         } else if (item.getItemId() == R.id.car){
-
             Intent intent = new Intent(MainActivity.this, ListCoursesActivity.class);
             startActivity(intent);
             finish();
-
             return true;
         }
         return false;

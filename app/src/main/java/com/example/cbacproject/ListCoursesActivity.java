@@ -45,7 +45,9 @@ public class ListCoursesActivity extends AppCompatActivity {
     private EditText erreurAPI;
 
     private List<Course> courses;
-    public static final String MY_PREFS_FILENAME = "com.example.cbacproject.CourseFav";
+    public static final String MY_PREFS_FILENAME = "mypref";
+
+    //public static final String MY_PREFS_FILENAME = "com.example.cbacproject.CourseFav";
     private String request;
 
     protected void onCreate(Bundle savedInstanceState) {

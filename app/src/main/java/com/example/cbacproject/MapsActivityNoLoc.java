@@ -84,22 +84,26 @@ public class MapsActivityNoLoc extends AppCompatActivity implements OnMapReadyCa
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        /**
-         * mise en place des réponse en cas de click sur les boutons de la toolbar
-         */
+        TextView txt;
         if (item.getItemId() == R.id.home) {
             Intent intent = new Intent(MapsActivityNoLoc.this, MainActivity.class);
             startActivity(intent);
+            finish();
             return true;
-        } else if (item.getItemId() == R.id.cat) {
+        } else if (item.getItemId() == R.id.cat){
             Intent intent = new Intent(MapsActivityNoLoc.this, DailyCatFact.class);
             startActivity(intent);
+            finish();
             return true;
-        } else if (item.getItemId() == R.id.map) {
+        }else if (item.getItemId() == R.id.map) {
             Intent intent = new Intent(MapsActivityNoLoc.this, RedirectMapActivity.class);
             startActivity(intent);
+            finish();
             return true;
-        } else if (item.getItemId() == R.id.car) {
+        } else if (item.getItemId() == R.id.car){
+            Intent intent = new Intent(MapsActivityNoLoc.this, ListCoursesActivity.class);
+            startActivity(intent);
+            finish();
             return true;
         }
         return false;

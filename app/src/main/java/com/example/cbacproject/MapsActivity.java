@@ -128,9 +128,6 @@ public class MapsActivity extends AppCompatActivity  implements OnMapReadyCallba
     }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        /**
-         * mise en place des réponse en cas de click sur les boutons de la toolbar
-         */
         TextView txt;
         if (item.getItemId() == R.id.home) {
             Intent intent = new Intent(MapsActivity.this, MainActivity.class);
@@ -148,6 +145,9 @@ public class MapsActivity extends AppCompatActivity  implements OnMapReadyCallba
             finish();
             return true;
         } else if (item.getItemId() == R.id.car){
+            Intent intent = new Intent(MapsActivity.this, ListCoursesActivity.class);
+            startActivity(intent);
+            finish();
             return true;
         }
         return false;

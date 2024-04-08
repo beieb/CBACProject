@@ -152,7 +152,7 @@ public class DailyCatFact extends AppCompatActivity {
 
 
 
-        @Override
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         TextView txt;
         if (item.getItemId() == R.id.home) {
@@ -166,12 +166,14 @@ public class DailyCatFact extends AppCompatActivity {
             finish();
             return true;
         }else if (item.getItemId() == R.id.map) {
-
-            Intent intent = new Intent(DailyCatFact.this, MapsActivity.class);
+            Intent intent = new Intent(DailyCatFact.this, RedirectMapActivity.class);
             startActivity(intent);
             finish();
             return true;
         } else if (item.getItemId() == R.id.car){
+            Intent intent = new Intent(DailyCatFact.this, ListCoursesActivity.class);
+            startActivity(intent);
+            finish();
             return true;
         }
         return false;

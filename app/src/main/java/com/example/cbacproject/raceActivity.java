@@ -34,6 +34,7 @@ public class raceActivity extends AppCompatActivity {
     }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        TextView txt;
         if (item.getItemId() == R.id.home) {
             Intent intent = new Intent(raceActivity.this, MainActivity.class);
             startActivity(intent);
@@ -50,6 +51,9 @@ public class raceActivity extends AppCompatActivity {
             finish();
             return true;
         } else if (item.getItemId() == R.id.car){
+            Intent intent = new Intent(raceActivity.this, ListCoursesActivity.class);
+            startActivity(intent);
+            finish();
             return true;
         }
         return false;

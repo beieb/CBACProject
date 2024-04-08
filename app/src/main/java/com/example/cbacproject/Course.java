@@ -169,4 +169,12 @@ public class Course {
 
         return result;
     }
+
+    public String affichageSimple(){
+        String result = "";
+        result += "Nom : " + this.getName() + "\n";
+        result += "Lieu : " + this.getLocality() + ", " + this.getCountry()+ "\n";
+        result += "Premier : " + this.getFirst() + "\n";
+        return result;
+    }
 }

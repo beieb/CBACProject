@@ -7,12 +7,15 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -40,9 +43,20 @@ public class ListCoursesActivity extends AppCompatActivity {
     //private String data1;
     //private String data2;
     private EditText erreurAPI;
+
+    private List<Course> courses;
+    public static final String MY_PREFS_FILENAME = "com.example.cbacproject.CourseFav";
+    private String request;
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_courses);
+
+        //SharedPreferences preferences = getSharedPreferences(MY_PREFS_FILENAME, MODE_PRIVATE);
+
+
+
+
         //call("https://ergast.com/api/f1/2024/results.json");
         erreurAPI = new EditText(getApplicationContext());
         erreurAPI.setText("API Innaccessible, encore...\nVeuillez réessayer dans quelques jours....");
@@ -70,6 +84,34 @@ public class ListCoursesActivity extends AppCompatActivity {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.toolbar, menu);
         return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        TextView txt;
+        if (item.getItemId() == R.id.home) {
+
+            Intent intent = new Intent(ListCoursesActivity.this, MainActivity.class);
+            startActivity(intent);
+            finish();
+            return true;
+        } else if (item.getItemId() == R.id.cat){
+
+            Intent intent = new Intent(ListCoursesActivity.this, DailyCatFact.class);
+            startActivity(intent);
+            finish();
+            return true;
+        }else if (item.getItemId() == R.id.map) {
+
+            Intent intent = new Intent(ListCoursesActivity.this, RedirectMapActivity.class);
+            startActivity(intent);
+            finish();
+            return true;
+        } else if (item.getItemId() == R.id.car){
+
+            return true;
+        }
+        return false;
     }
 
     public void call(String param){
@@ -134,7 +176,7 @@ public class ListCoursesActivity extends AppCompatActivity {
 
         LinearLayout layout = findViewById(R.id.layoutListeCourseIn);
 
-        List<Course> courses = new ArrayList<>();
+        courses = new ArrayList<>();
 
         JSONObject root = new JSONObject(toDisplay);
         JSONObject suite = root.getJSONObject("MRData");
@@ -156,7 +198,7 @@ public class ListCoursesActivity extends AppCompatActivity {
             JSONObject firsts = Results.getJSONObject(0);
 
             JSONObject driver = firsts.getJSONObject("Driver");
-            first = driver.getString("givenName") + driver.getString("familyName");
+            first = driver.getString("givenName") + " " + driver.getString("familyName");
 
             JSONObject construct = firsts.getJSONObject("Constructor");
             constructorFirst = construct.getString("name");
@@ -188,7 +230,7 @@ public class ListCoursesActivity extends AppCompatActivity {
 
             Course course = new Course(name, season, round, locality, country, first, firstTime, constructorFirst, second, secondTime, constructorSecond, third, thirdTime, constructorThird);
             courses.add(course);
-            generateTextView(i, layout, course.toString());
+            generateTextView(i, layout, course.affichageSimple());
 
         }
     }
@@ -209,7 +251,8 @@ public class ListCoursesActivity extends AppCompatActivity {
         } else {
             tw.setVisibility(View.VISIBLE);
         }
-        call("https://ergast.com/api/f1/" + annee + "/results.json?limit=999");
+        request = "https://ergast.com/api/f1/" + annee + "/results.json?limit=999";
+        call(request);
 
 
         //return 2024;
@@ -221,10 +264,23 @@ public class ListCoursesActivity extends AppCompatActivity {
     private void generateTextView(int index, LinearLayout layout, String text){
         EditText editText = new EditText(getApplicationContext());
         editText.setOnTouchListener(new OnSwipeTouchListener(ListCoursesActivity.this) { @Override public void onSwipeLeft() {
-                editText.setText("OLSAALALALALLA : " + index);}});
+            String s = editText.getText().toString();
+
+
+            SharedPreferences.Editor editor = getSharedPreferences(MY_PREFS_FILENAME, MODE_PRIVATE).edit();
+            editor.putString("courseFav", request);
+            editor.putInt("indexCourseFav", index);
+            editor.commit();
+            editText.setText("Course ajouté au favoris\n \n" + s);
+
+        }});
         editText.setText(text);
         editText.setId(index);
         layout.addView(editText);
+    }
+
+    public List<Course> getCourses() {
+        return courses;
     }
 
 }

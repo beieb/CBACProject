@@ -25,8 +25,8 @@ public class OnSwipeTouchListener implements OnTouchListener {
 
     private final class GestureListener extends SimpleOnGestureListener {
 
-        private static final int SWIPE_THRESHOLD = 1;
-        private static final int SWIPE_VELOCITY_THRESHOLD = 1;
+        private static final double SWIPE_THRESHOLD = 0.5;
+        private static final double SWIPE_VELOCITY_THRESHOLD = 0.5;
 
         @Override
         public boolean onDown(MotionEvent e) {

@@ -9,11 +9,6 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/addTitle"
-        android:layout_above="@+id/addContext"/>
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:id="@+id/addContext"
         android:layout_above="@+id/addButton"/>
     <Button

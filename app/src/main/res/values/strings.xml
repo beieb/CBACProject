@@ -45,5 +45,7 @@
     <string name="timeThird">Time :</string>
     <string name="timeThirddrace" />
     <string name="textResult">VAINQUEURE DE LA DERNIERE COURSE</string>
+    <string name="DeleteAll">Tout supprimer</string>
+    <string name="DeleteSelect">Supprimer cochée</string>
 
 </resources>

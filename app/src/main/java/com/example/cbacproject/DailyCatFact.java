@@ -37,7 +37,7 @@ public class DailyCatFact extends AppCompatActivity {
     private TextView et;
     private static String mypref = "mypref";
     private SharedPreferences sharePref;
-    private static String DATE = "dateDailyCatFact";
+    private static String DATE = "DateDailyCatFact";
     private static String DCF = "DailyCatFact";
 
 

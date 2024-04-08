@@ -17,7 +17,10 @@
 
 
     </FrameLayout>
-
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="param"/>
     <FrameLayout
         android:id="@+id/frame2"
         android:layout_height="wrap_content"

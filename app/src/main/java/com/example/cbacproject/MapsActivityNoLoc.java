@@ -226,5 +226,6 @@ public class MapsActivityNoLoc extends AppCompatActivity implements OnMapReadyCa
         }
         return result.toString();
     }
+
 }
 

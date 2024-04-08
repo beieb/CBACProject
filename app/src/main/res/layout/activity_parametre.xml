@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    tools:ignore="MissingDefaultResource">
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/addTitle"
+        android:layout_above="@+id/addContext"/>
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/addContext"
+        android:layout_above="@+id/addButton"/>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/addButton"
+        android:onClick="addPref"
+        android:layout_above="@id/scrollSave"
+        android:text="@string/addButton"
+        />
+
+
+    <ScrollView
+        android:id="@+id/scrollSave"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/checkButton">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:context=".ParametreActivity"
+            android:orientation="vertical"
+            android:id="@+id/SaveLayout">
+        </LinearLayout>
+    </ScrollView>
+    <Button
+        android:id="@+id/checkButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/DeleteSelect"
+        android:onClick="DeleteSelect"
+        android:layout_above="@id/mytoolbar"
+        />
+    <Button
+        android:id="@+id/DellButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/DeleteAll"
+        android:onClick="DeleteAll"
+        android:layout_above="@id/mytoolbar"
+        android:layout_toRightOf="@+id/checkButton"
+        />
+
+
+        <androidx.appcompat.widget.Toolbar
+
+            android:id="@+id/mytoolbar"
+            android:layout_height="50dp"
+            android:layout_width="match_parent"
+            android:elevation="4dp"
+            android:theme="?attr/actionBarTheme"
+            android:layout_alignParentBottom="true"
+            android:title="@string/mapToolbar"
+            android:background="@color/purplelogo"
+
+
+            />
+
+    </RelativeLayout>

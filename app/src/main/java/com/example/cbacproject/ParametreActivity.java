@@ -2,12 +2,10 @@ package com.example.cbacproject;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -16,20 +14,17 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
 import java.util.Map;
 
 public class ParametreActivity extends AppCompatActivity {
     private static String mypref = "mypref";
     private SharedPreferences sharePref;
-    private static String tag="ParamLog";
     private int nbPref;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_parametre);
-        Log.d(tag, "start");
         init();
 
         Toolbar myToolbar = findViewById(R.id.mytoolbar);
@@ -89,10 +84,6 @@ public class ParametreActivity extends AppCompatActivity {
 
     }
 
-
-
-
-
     public Map<String, ?> Get(){
         sharePref=getSharedPreferences(mypref, Context.MODE_PRIVATE);
         return sharePref.getAll();
@@ -141,17 +132,14 @@ public class ParametreActivity extends AppCompatActivity {
         finish();
     }
     public void DeleteSelect(View view){
-        Log.d(tag, String.valueOf(nbPref));
         LinearLayout layoutQuiz = findViewById(R.id.SaveLayout);
         for(int i =0; i<nbPref;i++){
             TextView textView = layoutQuiz.findViewById(i);
             CheckBox checkBox = layoutQuiz.findViewById(i +100);
             String lab = textView.getText().toString();
             String Label= lab.split(":")[0];
-            Log.d(tag, Label);
 
             if(checkBox.isChecked()){
-                Log.d(tag, "delete");
                 sharePref.edit().remove(Label).apply();
 
             }

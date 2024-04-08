@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ListCoursesActivity"
-    android:id="@+id/layoutQuizOut">
+    >
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -36,7 +36,6 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            tools:context=".quizActivity"
             android:orientation="vertical"
             android:id="@+id/layoutListeCourseIn">
         </LinearLayout>

@@ -6,19 +6,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     tools:ignore="MissingDefaultResource">
 
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/addContext"
-        android:layout_above="@+id/addButton"/>
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/addButton"
-        android:onClick="addPref"
-        android:layout_above="@id/scrollSave"
-        android:text="@string/addButton"
-        />
+
 
 
     <ScrollView
@@ -40,7 +28,7 @@
         android:layout_height="wrap_content"
         android:text="@string/DeleteSelect"
         android:onClick="DeleteSelect"
-        android:layout_above="@id/mytoolbar"
+        android:layout_above="@id/addContext"
         />
     <Button
         android:id="@+id/DellButton"
@@ -48,9 +36,22 @@
         android:layout_height="wrap_content"
         android:text="@string/DeleteAll"
         android:onClick="DeleteAll"
-        android:layout_above="@id/mytoolbar"
+        android:layout_above="@id/addContext"
         android:layout_toRightOf="@+id/checkButton"
         />
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/addContext"
+        android:layout_above="@+id/addButton"/>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/addButton"
+        android:onClick="addPref"
+        android:text="@string/addButton"
+        android:layout_above="@+id/mytoolbar"/>
+    />
 
 
         <androidx.appcompat.widget.Toolbar

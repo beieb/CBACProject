@@ -25,7 +25,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class DailyCatFact extends AppCompatActivity {
-    private static String mypref = "mypref";
+    private static String mypref = "myprefs";
     private SharedPreferences sharePref;
     private static String DATE = "DateDailyCatFact";
     private static String DCF = "DailyCatFact";

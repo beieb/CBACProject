@@ -39,7 +39,7 @@ public class DailyCatFact extends AppCompatActivity {
 
         setSupportActionBar(myToolbar);
         getSupportActionBar().setLogo(R.mipmap.ic_launcher);
-        getSupportActionBar().setTitle("DCF");
+        getSupportActionBar().setTitle("AT");
 
         Date now = new Date();
         DateFormat dateFormatter = DateFormat.getDateInstance(DateFormat.SHORT);

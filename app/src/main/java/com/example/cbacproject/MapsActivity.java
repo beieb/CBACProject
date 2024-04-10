@@ -54,8 +54,6 @@ public class MapsActivity extends AppCompatActivity  implements OnMapReadyCallba
     FrameLayout map;
     private double lat;
     private double lon;
-    private String tag = "PermissionApplication";
-
     private int LOCATION_PERMISSION_CODE =1;
     private LocationRequest locationRequest;
     private List<circuit> listCircuit;
@@ -206,7 +204,7 @@ public class MapsActivity extends AppCompatActivity  implements OnMapReadyCallba
 
     private boolean isGPSEnable(){
         LocationManager lM = null;
-        boolean isEnable =false;
+        boolean isEnable;
         if (lM == null){
             lM = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
         }

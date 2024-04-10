@@ -135,7 +135,7 @@ public class MainActivity extends AppCompatActivity {
         if(toDisplay.equals("Erreur ") ||toDisplay.equals("Erreur")){
             this.circuit.setText("Impossible d'obtenir cette information");
         }else {
-            String result = null;
+            String result;
 
             JSONObject root = new JSONObject(toDisplay);
             JSONObject MRData = root.getJSONObject("MRData");

@@ -17,7 +17,7 @@ import android.widget.TextView;
 import java.util.Map;
 
 public class ParametreActivity extends AppCompatActivity {
-    private static String mypref = "mypref";
+    private static final String mypref = "mypref";
     private SharedPreferences sharePref;
     private int nbPref;
 

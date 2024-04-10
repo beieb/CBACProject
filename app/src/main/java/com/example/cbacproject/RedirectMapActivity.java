@@ -27,12 +27,10 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import java.util.ArrayList;
-import java.util.List;
 
 public class RedirectMapActivity extends AppCompatActivity implements OnMapReadyCallback {
 
-    private int LOCATION_PERMISSION_CODE =1;
+    private final int LOCATION_PERMISSION_CODE =1;
     private LocationRequest locationRequest;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -165,10 +163,8 @@ public class RedirectMapActivity extends AppCompatActivity implements OnMapReady
 
     private boolean isGPSEnable(){
         LocationManager lM = null;
-        boolean isEnable =false;
-        if (lM == null){
-            lM = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
-        }
+        boolean isEnable;
+        lM = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
         isEnable = lM.isProviderEnabled(LocationManager.GPS_PROVIDER);
         return isEnable;
     }

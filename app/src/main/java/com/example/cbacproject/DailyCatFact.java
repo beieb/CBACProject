@@ -1,12 +1,7 @@
 package com.example.cbacproject;
 
-import static com.google.android.gms.tasks.Tasks.call;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -17,24 +12,19 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.TextView;
-
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.text.DateFormat;
-import java.text.FieldPosition;
-import java.text.ParsePosition;
 import java.util.Date;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class DailyCatFact extends AppCompatActivity {
-    private TextView et;
     private static String mypref = "mypref";
     private SharedPreferences sharePref;
     private static String DATE = "DateDailyCatFact";
@@ -54,8 +44,6 @@ public class DailyCatFact extends AppCompatActivity {
         Date now = new Date();
         DateFormat dateFormatter = DateFormat.getDateInstance(DateFormat.SHORT);
         String dateFormat = dateFormatter.format(now);
-
-        et = findViewById(R.id.Dailycatfact);
 
         if(dateFormat.equals(Get(DATE))){
             display(Get(DCF));

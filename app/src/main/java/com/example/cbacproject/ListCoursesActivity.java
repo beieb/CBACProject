@@ -92,25 +92,24 @@ public class ListCoursesActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         TextView txt;
         if (item.getItemId() == R.id.home) {
-
             Intent intent = new Intent(ListCoursesActivity.this, MainActivity.class);
             startActivity(intent);
             finish();
             return true;
         } else if (item.getItemId() == R.id.cat){
-
             Intent intent = new Intent(ListCoursesActivity.this, DailyCatFact.class);
             startActivity(intent);
             finish();
             return true;
         }else if (item.getItemId() == R.id.map) {
-
             Intent intent = new Intent(ListCoursesActivity.this, RedirectMapActivity.class);
             startActivity(intent);
             finish();
             return true;
         } else if (item.getItemId() == R.id.car){
-
+            Intent intent = new Intent(ListCoursesActivity.this, ListCoursesActivity.class);
+            startActivity(intent);
+            finish();
             return true;
         }
         return false;
@@ -247,14 +246,20 @@ public class ListCoursesActivity extends AppCompatActivity {
             if (parseInt(search) > 2024 || parseInt(search) < 1950) {
                 tw.setVisibility(View.VISIBLE);
             } else {
+                tw.setVisibility(View.INVISIBLE);
                 annee = parseInt(search);
+                request = "https://ergast.com/api/f1/" + annee + "/results.json?limit=999";
+                call(request);
                 //return parseInt(search);
             }
         } else {
-            tw.setVisibility(View.VISIBLE);
+            request = "https://ergast.com/api/f1/" + annee + "/results.json?limit=999";
+            call(request);
+            tw.setVisibility(View.INVISIBLE);
+            if(! search.equals(""))
+                tw.setVisibility(View.VISIBLE);
         }
-        request = "https://ergast.com/api/f1/" + annee + "/results.json?limit=999";
-        call(request);
+
 
 
         //return 2024;

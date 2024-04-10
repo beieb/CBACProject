@@ -33,7 +33,7 @@ import java.util.concurrent.Executors;
 
 public class MainActivity extends AppCompatActivity {
 
-    private TextView circuit;
+    private TextView vainqueurLastCourse;
 
     /**
      *
@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().setLogo(R.mipmap.ic_launcher);
         getSupportActionBar().setTitle("HOME");
 
-        circuit = findViewById(R.id.circuit);
+        vainqueurLastCourse = findViewById(R.id.vainqueur);
 
         WebView wv = findViewById(R.id.webview);
         wv.getSettings().setJavaScriptEnabled(true);
@@ -133,7 +133,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void display(String toDisplay) throws JSONException {
         if(toDisplay.equals("Erreur ") ||toDisplay.equals("Erreur")){
-            this.circuit.setText("Impossible d'obtenir cette information");
+            this.vainqueurLastCourse.setText("Impossible d'obtenir cette information");
         }else {
             String result;
 
@@ -150,7 +150,7 @@ public class MainActivity extends AppCompatActivity {
 
             result = givenName + "\n" + familyName;
 
-            this.circuit.setText(result);
+            this.vainqueurLastCourse.setText(result);
         }
     }
     public String getDataFromHTTP(String param){

@@ -49,20 +49,22 @@ public class RedirectMapActivity extends AppCompatActivity implements OnMapReady
     private void chooseActivity(){
         Intent intent = null;
 
-        if (ActivityCompat.checkSelfPermission(RedirectMapActivity.this, ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-            //verifie que l'utilisateur a donnée la permission pour la localisation
-            if (isGPSEnable()) {
-                //verifie que l'utilisateur a le gps d'activé
-                intent = new Intent(RedirectMapActivity.this, MapsActivity.class);
-                sActivity(intent);
+        if(Build.VERSION.SDK_INT>= Build.VERSION_CODES.M){
+            if(ActivityCompat.checkSelfPermission(RedirectMapActivity.this, ACCESS_FINE_LOCATION)== PackageManager.PERMISSION_GRANTED){
+                //verifie que l'utilisateur a donnée la permission pour la localisation
+                if (isGPSEnable()){
+                    //verifie que l'utilisateur a le gps d'activé
+                    intent = new Intent(RedirectMapActivity.this, MapsActivity.class);
+                    sActivity(intent);
 
-            } else {
-                locationRequest = LocationRequest.create();
-                locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
-                turnOnGPS();
+                }else {
+                    locationRequest = LocationRequest.create();
+                    locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+                    turnOnGPS();
+                }
+            }else{
+                requestLocPermission();
             }
-        } else {
-            requestLocPermission();
         }
 
     }

@@ -85,42 +85,39 @@ public class MapsActivity extends AppCompatActivity  implements OnMapReadyCallba
         locationRequest.setInterval(5000);
         locationRequest.setFastestInterval(2000);
 
-        if(Build.VERSION.SDK_INT>= Build.VERSION_CODES.M){
-            if(ActivityCompat.checkSelfPermission(MapsActivity.this, ACCESS_FINE_LOCATION)== PackageManager.PERMISSION_GRANTED){
-                //verifie que l'utilisateur a donnée la permission pour la localisation
-                if (isGPSEnable()){
-                    //verifie que l'utilisateur a le gps d'activé
-                    LocationServices.getFusedLocationProviderClient(MapsActivity.this)
-                                    .requestLocationUpdates(locationRequest, new LocationCallback() {
-                                        //fait une request pour obtenir la localisation
-                                        @Override
-                                        public void onLocationResult(@NonNull LocationResult locationResult) {
-                                            super.onLocationResult(locationResult);
+        if (ActivityCompat.checkSelfPermission(MapsActivity.this, ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+            //verifie que l'utilisateur a donnée la permission pour la localisation
+            if (isGPSEnable()) {
+                //verifie que l'utilisateur a le gps d'activé
+                LocationServices.getFusedLocationProviderClient(MapsActivity.this)
+                        .requestLocationUpdates(locationRequest, new LocationCallback() {
+                            //fait une request pour obtenir la localisation
+                            @Override
+                            public void onLocationResult(@NonNull LocationResult locationResult) {
+                                super.onLocationResult(locationResult);
 
-                                            LocationServices.getFusedLocationProviderClient(MapsActivity.this)
-                                                    .removeLocationUpdates(this);
-                                            if (locationResult != null && locationResult.getLocations().size()>0){
-                                                int index = locationResult.getLocations().size()-1;
-                                                lat= locationResult.getLocations().get(index).getLatitude();
-                                                lon= locationResult.getLocations().get(index).getLongitude();
-                                                map = findViewById(R.id.map);
+                                LocationServices.getFusedLocationProviderClient(MapsActivity.this)
+                                        .removeLocationUpdates(this);
+                                if (locationResult != null && locationResult.getLocations().size() > 0) {
+                                    int index = locationResult.getLocations().size() - 1;
+                                    lat = locationResult.getLocations().get(index).getLatitude();
+                                    lon = locationResult.getLocations().get(index).getLongitude();
+                                    map = findViewById(R.id.map);
 
-                                                SupportMapFragment mapFragment= (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
-                                                mapFragment.getMapAsync(MapsActivity.this);
-                                            }
-                                        }
-                                    }, Looper.getMainLooper());
-                }else {
-                    Intent intent = new Intent(MapsActivity.this, RedirectMapActivity.class);
-                    startActivity(intent);
-                    finish();
-                }
-
-            }else{
-                requestLocPermission();
+                                    SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
+                                    mapFragment.getMapAsync(MapsActivity.this);
+                                }
+                            }
+                        }, Looper.getMainLooper());
+            } else {
+                Intent intent = new Intent(MapsActivity.this, RedirectMapActivity.class);
+                startActivity(intent);
+                finish();
             }
-        }
 
+        } else {
+            requestLocPermission();
+        }
 
 
     }

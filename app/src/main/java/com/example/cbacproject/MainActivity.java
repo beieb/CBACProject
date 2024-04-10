@@ -3,7 +3,9 @@ package com.example.cbacproject;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -35,6 +37,10 @@ public class MainActivity extends AppCompatActivity {
 
     private TextView vainqueurLastCourse;
 
+    private SharedPreferences sharePref;
+
+    private static final String mypref = "mypref";
+
     /**
      *
      * @param savedInstanceState If the activity is being re-initialized after
@@ -58,6 +64,7 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().setTitle("HOME");
 
         vainqueurLastCourse = findViewById(R.id.vainqueur);
+        TextView tVCourseFav = findViewById(R.id.fav);
 
         WebView wv = findViewById(R.id.webview);
         wv.getSettings().setJavaScriptEnabled(true);
@@ -65,6 +72,15 @@ public class MainActivity extends AppCompatActivity {
         WebViewClient wvc = new WebViewClient();
         wv.setWebViewClient(wvc);
         go(this.getCurrentFocus());
+
+        sharePref=getSharedPreferences(mypref, Context.MODE_PRIVATE);
+        String courseFav = sharePref.getString("courseFav", "");
+
+        tVCourseFav.setText(courseFav);
+
+
+
+
 
     }
 

@@ -51,5 +51,6 @@
     <string name="para">Parametre</string>
     <string name="course_favorite">Course favorite:</string>
     <string name="vous_n_avez_pas_de_course_favorite">vous n\'avez pas de course favorite</string>
+    <string name="rechercher">rechercher</string>
 
 </resources>

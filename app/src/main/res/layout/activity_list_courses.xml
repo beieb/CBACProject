@@ -16,9 +16,9 @@
         android:id="@+id/searchButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="serch"
+        android:text="@string/rechercher"
         android:onClick="searchSeason"
-        android:layout_alignParentRight="true"/>
+        android:layout_alignParentEnd="true"/>
     <TextView
         android:id="@+id/wrongSearch"
         android:layout_width="wrap_content"

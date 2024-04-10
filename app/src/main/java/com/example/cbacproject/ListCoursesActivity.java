@@ -33,10 +33,11 @@ import java.util.concurrent.Executors;
 
 public class ListCoursesActivity extends AppCompatActivity {
     private EditText erreurAPI;
+    private List<EditText> editTexts = new ArrayList<EditText>();
 
     private List<Course> courses;
     public static final String MY_PREFS_FILENAME = "mypref";
-
+    private boolean demander = false;
     private String request;
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,6 +95,20 @@ public class ListCoursesActivity extends AppCompatActivity {
     }
 
     public void call(String param){
+        if(this.demander){
+            LinearLayout lay = findViewById(R.id.layoutListeCourseIn);
+            lay.removeAllViews();
+            /*for (int i = 0; i<editTexts.size(); i++) {
+                editTexts.get(i).setVisibility(View.INVISIBLE);
+
+            }*/
+            courses.removeAll(courses);
+            editTexts.removeAll(editTexts);
+        }
+
+
+        this.demander = true;
+
         ExecutorService ex= Executors.newSingleThreadExecutor();
         Handler handler = new Handler(Looper.getMainLooper());
         ex.execute(() -> {
@@ -242,8 +257,8 @@ public class ListCoursesActivity extends AppCompatActivity {
 
 
             SharedPreferences.Editor editor = getSharedPreferences(MY_PREFS_FILENAME, MODE_PRIVATE).edit();
-            editor.putString("courseFav", request);
-            editor.putInt("indexCourseFav", index);
+            editor.putString("courseFav", s);
+
             editor.commit();
             editText.setText("Course ajouté au favoris\n \n" + s);
 
@@ -251,6 +266,7 @@ public class ListCoursesActivity extends AppCompatActivity {
         editText.setText(text);
         editText.setId(index);
         layout.addView(editText);
+        editTexts.add(editText);
     }
 
     public List<Course> getCourses() {

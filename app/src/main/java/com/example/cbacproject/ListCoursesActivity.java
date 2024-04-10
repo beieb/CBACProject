@@ -198,24 +198,24 @@ public class ListCoursesActivity extends AppCompatActivity {
 
             JSONObject seconds = Results.getJSONObject(1);
 
-            driver = firsts.getJSONObject("Driver");
+            driver = seconds.getJSONObject("Driver");
             second = driver.getString("givenName") + driver.getString("familyName");
 
-            construct = firsts.getJSONObject("Constructor");
+            construct = seconds.getJSONObject("Constructor");
             constructorSecond = construct.getString("name");
 
-            lap = firsts.getJSONObject("Time");
+            lap = seconds.getJSONObject("Time");
 
             secondTime = lap.getString("time");
             JSONObject thirds = Results.getJSONObject(2);
 
-            driver = firsts.getJSONObject("Driver");
+            driver = thirds.getJSONObject("Driver");
             third = driver.getString("givenName") + driver.getString("familyName");
 
-            construct = firsts.getJSONObject("Constructor");
+            construct = thirds.getJSONObject("Constructor");
             constructorThird = construct.getString("name");
 
-            lap = firsts.getJSONObject("Time");
+            lap = thirds.getJSONObject("Time");
             thirdTime = lap.getString("time");
 
             Course course = new Course(name, season, round, locality, country, first, firstTime, constructorFirst, second, secondTime, constructorSecond, third, thirdTime, constructorThird);
@@ -252,17 +252,38 @@ public class ListCoursesActivity extends AppCompatActivity {
     @SuppressLint("ClickableViewAccessibility")
     private void generateTextView(int index, LinearLayout layout, String text){
         EditText editText = new EditText(getApplicationContext());
-        editText.setOnTouchListener(new OnSwipeTouchListener(ListCoursesActivity.this) { @Override public void onSwipeLeft() {
-            String s = editText.getText().toString();
-
+        final boolean[] affSimple = {true};
+        editText.setOnTouchListener(new OnSwipeTouchListener(ListCoursesActivity.this) {
+            @Override public void onSwipeLeft() {
+            String s = "";
+                if(affSimple[0]){
+                    s = courses.get(index).affichageSimple();
+                }
+                else{
+                    s = courses.get(index).toString();
+                }
 
             SharedPreferences.Editor editor = getSharedPreferences(MY_PREFS_FILENAME, MODE_PRIVATE).edit();
-            editor.putString("courseFav", s);
+            editor.putString("courseFav", courses.get(index).affichageSimple());
 
             editor.commit();
             editText.setText("Course ajouté au favoris\n \n" + s);
+            }
 
-        }});
+            @Override
+            public void onSwipeRight() {
+                if(affSimple[0]){
+                    editText.setText(courses.get(index).toString());
+                    affSimple[0] = false;
+                }
+                else{
+                    editText.setText(courses.get(index).affichageSimple());
+                    affSimple[0] = true;
+                }
+
+            }
+        });
+
         editText.setText(text);
         editText.setId(index);
         layout.addView(editText);

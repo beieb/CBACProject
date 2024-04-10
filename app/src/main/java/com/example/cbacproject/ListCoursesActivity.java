@@ -18,6 +18,8 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -267,7 +269,9 @@ public class ListCoursesActivity extends AppCompatActivity {
             editor.putString("courseFav", courses.get(index).affichageSimple());
 
             editor.commit();
-            editText.setText("Course ajouté au favoris\n \n" + s);
+            Toast toast = Toast.makeText(getApplicationContext(), "Mis en course favorite", Toast.LENGTH_SHORT );
+            toast.show();
+
             }
 
             @Override
